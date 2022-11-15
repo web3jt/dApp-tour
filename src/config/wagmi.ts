@@ -1,4 +1,15 @@
-import { connectorsForWallets, wallet } from "@rainbow-me/rainbowkit";
+import { connectorsForWallets } from "@rainbow-me/rainbowkit";
+import {
+    injectedWallet,
+    metaMaskWallet,
+    braveWallet,
+    rainbowWallet,
+    walletConnectWallet,
+    coinbaseWallet,
+    trustWallet,
+    imTokenWallet,
+} from '@rainbow-me/rainbowkit/wallets';
+
 import { chain, configureChains, createClient } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { infuraProvider } from "wagmi/providers/infura";
@@ -32,17 +43,20 @@ const connectors = connectorsForWallets([
     {
         groupName: "Popular",
         wallets: [
-            wallet.metaMask({ chains, shimDisconnect: true }),
-            wallet.brave({ chains, shimDisconnect: true }),
-            wallet.rainbow({ chains }),
-            wallet.walletConnect({ chains }),
-            wallet.coinbase({ appName: "Coinbase", chains }),
-            ...(needsInjectedWalletFallback ? [wallet.injected({ chains, shimDisconnect: true })] : []),
+            metaMaskWallet({ chains }),
+            braveWallet({ chains }),
+            rainbowWallet({ chains }),
+            walletConnectWallet({ chains }),
+            coinbaseWallet({ appName: "Coinbase", chains }),
+            ...(needsInjectedWalletFallback ? [injectedWallet({ chains })] : []),
         ],
     },
     {
         groupName: "Other",
-        wallets: [wallet.trust({ chains, shimDisconnect: true }), wallet.steak({ chains }), wallet.imToken({ chains })],
+        wallets: [
+            trustWallet({ chains }),
+            imTokenWallet({ chains })
+        ],
     },
 ]);
 
