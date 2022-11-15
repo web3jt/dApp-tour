@@ -1,4 +1,4 @@
-import { connectorsForWallets } from "@rainbow-me/rainbowkit";
+import { Chain, connectorsForWallets } from "@rainbow-me/rainbowkit";
 import {
     injectedWallet,
     metaMaskWallet,
@@ -16,19 +16,45 @@ import { infuraProvider } from "wagmi/providers/infura";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { publicProvider } from "wagmi/providers/public";
 
+const ethereumPoWChainMainnet: Chain = {
+    id: 10_001,
+    name: 'EthereumPoW',
+    network: 'ETHW-mainnet',
+    iconUrl: '',
+    iconBackground: '#fff',
+    nativeCurrency: {
+        decimals: 18,
+        name: 'EthereumPoW',
+        symbol: 'ETHW',
+    },
+    rpcUrls: {
+        default: 'https://mainnet.ethereumpow.org',
+    },
+    blockExplorers: {
+        default: { name: 'OKLink', url: 'https://www.oklink.com/en/ethw' },
+        ethwscan: { name: 'ETHWScan', url: 'https://mainnet.ethwscan.com' },
+    },
+    testnet: false,
+};
+
 
 // console.log();
 
 export const { chains, provider, webSocketProvider } = configureChains(
-    [chain.mainnet, chain.goerli],
     [
-        // alchemyProvider({ priority: 2, apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
-        // jsonRpcProvider({ priority: 1, rpc: (chain) => ({ http: chain.rpcUrls.default }) }),
-        // publicProvider({ priority: 0 }),
+        chain.mainnet,
+        chain.goerli,
+        // ethereumPoWChainMainnet,
+    ],
+    [
+        alchemyProvider({ priority: 3, apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
+        jsonRpcProvider({ priority: 2, rpc: (chain) => ({ http: chain.rpcUrls.default }) }),
+        infuraProvider({ priority: 1, apiKey: process.env.NEXT_PUBLIC_INFURA_ID }),
+        publicProvider({ priority: 0 }),
 
-        alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
-        infuraProvider({ apiKey: process.env.NEXT_PUBLIC_INFURA_ID }),
         // jsonRpcProvider({ rpc: (chain) => ({ http: chain.rpcUrls.default }) }),
+        // alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
+        // infuraProvider({ apiKey: process.env.NEXT_PUBLIC_INFURA_ID }),
         // publicProvider(),
     ],
 );
