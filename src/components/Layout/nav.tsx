@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react'
+import Image from 'next/image';
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import {
     Bars3Icon,
@@ -224,7 +225,7 @@ const Example = () => {
                                                     {category.featured.map((item) => (
                                                         <div key={item.name} className="group relative">
                                                             <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
-                                                                <img src={item.imageSrc} alt={item.imageAlt} className="object-cover object-center" />
+                                                                <Image src={item.imageSrc} alt={item.imageAlt} className="object-cover object-center" />
                                                             </div>
                                                             <a href={item.href} className="mt-6 block text-sm font-medium text-gray-900">
                                                                 <span className="absolute inset-0 z-10" aria-hidden="true" />
@@ -298,7 +299,7 @@ const Example = () => {
             <div className="relative bg-gray-900">
                 {/* Decorative image and overlay */}
                 <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
-                    <img
+                    <Image
                         src="https://tailwindui.com/img/ecommerce-images/home-page-01-hero-full-width.jpg"
                         alt=""
                         className="h-full w-full object-cover object-center"
@@ -320,7 +321,7 @@ const Example = () => {
                                         <div className="hidden lg:flex lg:flex-1 lg:items-center">
                                             <a href="#">
                                                 <span className="sr-only">Your Company</span>
-                                                <img
+                                                <Image
                                                     className="h-8 w-auto"
                                                     src="https://tailwindui.com/img/logos/mark.svg?color=white"
                                                     alt=""
@@ -368,7 +369,7 @@ const Example = () => {
                                                                                         {category.featured.map((item) => (
                                                                                             <div key={item.name} className="group relative">
                                                                                                 <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
-                                                                                                    <img
+                                                                                                    <Image
                                                                                                         src={item.imageSrc}
                                                                                                         alt={item.imageAlt}
                                                                                                         className="object-cover object-center"
@@ -423,7 +424,7 @@ const Example = () => {
                                         {/* Logo (lg-) */}
                                         <a href="#" className="lg:hidden">
                                             <span className="sr-only">Your Company</span>
-                                            <img src="https://tailwindui.com/img/logos/mark.svg?color=white" alt="" className="h-8 w-auto" />
+                                            <Image src="https://tailwindui.com/img/logos/mark.svg?color=white" alt="" className="h-8 w-auto" />
                                         </a>
 
                                         <div className="flex flex-1 items-center justify-end">

@@ -110,15 +110,7 @@ export const CustomConnect = () => {
 };
 
 
-
-
-
-
-
-
-
-
-export default () => {
+export default function Header() {
     return (
         <>
             <CustomConnect></CustomConnect>
