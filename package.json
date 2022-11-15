@@ -17,7 +17,7 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "typechain": "^8.1.0",
-        "wagmi": "^0.6.4"
+        "wagmi": "^0.6.8"
     },
     "devDependencies": {
         "@headlessui/react": "^1.7.4",
