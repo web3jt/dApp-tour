@@ -48,9 +48,9 @@ export const { chains, provider, webSocketProvider } = configureChains(
     ],
     [
         alchemyProvider({ priority: 3, apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
-        jsonRpcProvider({ priority: 2, rpc: (chain) => ({ http: chain.rpcUrls.default }) }),
-        infuraProvider({ priority: 1, apiKey: process.env.NEXT_PUBLIC_INFURA_ID }),
-        publicProvider({ priority: 0 }),
+        // jsonRpcProvider({ priority: 2, rpc: (chain) => ({ http: chain.rpcUrls.default }) }),
+        // infuraProvider({ priority: 1, apiKey: process.env.NEXT_PUBLIC_INFURA_ID }),
+        // publicProvider({ priority: 0 }),
 
         // jsonRpcProvider({ rpc: (chain) => ({ http: chain.rpcUrls.default }) }),
         // alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),

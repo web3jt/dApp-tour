@@ -21,6 +21,8 @@
         "incremental": true,
         "baseUrl": "./src"
     },
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "include": [
         "next-env.d.ts",
         "**/*.ts",

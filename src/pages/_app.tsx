@@ -27,7 +27,8 @@ function DApp({ Component, pageProps }: AppProps) {
                 theme={darkTheme()}
                 chains={chains}
                 initialChain={chain.goerli}
-                showRecentTransactions={true} appInfo={{
+                // showRecentTransactions={true}
+                appInfo={{
                     // TODO
                     appName: 'Rainbowkit Demo',
                     learnMoreUrl: 'https://learnaboutcryptowallets.example',
