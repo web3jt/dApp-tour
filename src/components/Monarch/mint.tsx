@@ -19,6 +19,7 @@ import { useDebounce } from 'usehooks-ts';
 
 import Max7 from "../../components/Layout/max7";
 
+
 import Image from 'next/image';
 
 
@@ -190,7 +191,7 @@ const Mint = () => {
             }
 
             if (mintCodeErrorMessage) {
-                setMintButtonText(`Cannot claim TokenID#${mintCodeJSON.tokenId}`);
+                setMintButtonText(`Can NOT claim TokenID#${mintCodeJSON.tokenId}`);
                 return;
             }
 
@@ -324,7 +325,7 @@ const Mint = () => {
                                         <textarea
                                             rows={4}
                                             onKeyUp={(e) => setMintCode(e.currentTarget.value.trim())}
-                                            className="block w-full rounded-md bg-gray-700 border-gray-600 shadow-sm focus:border-indigo-400 focus:ring-indigo-400 text-sm sm:text-base text-gray-300"
+                                            className="block w-full rounded-md bg-gray-700 border-gray-600 shadow-sm focus:border-indigo-400 focus:ring-indigo-400 font-mono text-sm sm:text-base text-gray-300"
                                             placeholder="Enter your Mint-Code here"
                                             defaultValue={''}
                                         />
@@ -334,11 +335,11 @@ const Mint = () => {
                                             {mintCodeErrorMessage}
                                         </div>
                                     )}
-                                    <div className="flex justify-end">
+                                    <div className="flex justify-center">
                                         <button
                                             disabled={!writeMint || !isWriteMintIdle}
                                             onClick={handleMint}
-                                            className="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-sm font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                                            className="w-full inline-flex justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-sm font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 text-center"
                                         >
                                             {mintButtonText}
                                         </button>
