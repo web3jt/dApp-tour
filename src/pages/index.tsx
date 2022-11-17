@@ -20,11 +20,9 @@ const Home: NextPage = () => {
             <div>
                 <div className="bg-gray-800">
                     <Max7>
-                        {/* <div className="py-12">
-                            <Mint />
-                        </div> */}
                         <div className="py-12">
-                            <Mint />
+                            <Account />
+                            {/* <Mint /> */}
                         </div>
                     </Max7>
                 </div>
