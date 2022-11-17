@@ -1,36 +1,14 @@
-// import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
-
-import {
-    Fragment,
-    useEffect,
-    useState,
-    KeyboardEvent,
-    ReactNode,
-} from 'react';
-import {
-    useAccount,
-    useContractWrite,
-    usePrepareContractWrite,
-} from "wagmi";
-import { ethers } from 'ethers';
-import CONTRACT_ABI from '../../config/abi/monarchMixer';
-
-import { useDebounce } from 'usehooks-ts';
-
-import Max7 from "../../components/Layout/max7";
-
-
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
-
-
+import { ethers } from 'ethers';
+import { useAccount, useContractWrite, usePrepareContractWrite } from "wagmi";
+import { useDebounce } from 'usehooks-ts';
+import CONTRACT_ABI from '../../config/abi/monarchMixer';
+import Max7 from "../../components/Layout/max7";
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ');
 }
-
-
-
-
 
 const MONARCH_MIXER_CONTRACT_CONFIG = {
     addressOrName: '0x60B2D8fF61EA7adbee55BfC574F68AFFBaA9441b',
