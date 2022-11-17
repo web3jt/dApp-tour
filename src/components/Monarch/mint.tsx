@@ -4,6 +4,7 @@ import {
     useEffect,
     useState,
     KeyboardEvent,
+    ReactNode,
 } from 'react';
 import { GetAccountResult } from '@wagmi/core';
 import {
@@ -19,6 +20,8 @@ import { ethers } from 'ethers';
 import { readContract, prepareWriteContract, writeContract } from "@wagmi/core";
 import CONTRACT_ABI from '../../config/abi/monarchMixer';
 
+import { useDebounce } from 'usehooks-ts';
+
 const MONARCH_MIXER_CONTRACT_CONFIG = {
     addressOrName: '0x60B2D8fF61EA7adbee55BfC574F68AFFBaA9441b',
     contractInterface: CONTRACT_ABI,
@@ -31,170 +34,229 @@ interface MintCodeJSON {
 }
 
 
+
+
 export default () => {
-    // const addRecentTransaction = useAddRecentTransaction();
-
     const { address } = useAccount();
-    const { data: signer, isError, isLoading } = useSigner();
-    const provider = useProvider();
-
-    // use `useContract` but not `useContractRead` to avoid calling the contract mulitple times
-    const contract = useContract({
-        ...MONARCH_MIXER_CONTRACT_CONFIG,
-        signerOrProvider: signer || provider,
-    });
 
     // `mintCode`
     const [mintCode, setMintCode] = useState<string>('');
     const [mintCodeError, setMintCodeError] = useState<string>();
     const [mintCodeJSON, setMintCodeJSON] = useState<MintCodeJSON>();
     useEffect(() => {
-        const s = mintCode;
-        if (s) {
+        if (mintCode) {
             try {
-                const strJson = new TextDecoder().decode(ethers.utils.base58.decode(s));
+                const strJson = new TextDecoder().decode(ethers.utils.base58.decode(mintCode));
                 setMintCodeJSON(JSON.parse(strJson));
                 setMintCodeError(undefined);
             } catch (e) {
                 setMintCodeJSON(undefined);
                 setMintCodeError('MintCode: invalid');
             }
-        } else {
-            setMintCodeJSON(undefined);
-            setMintCodeError(undefined);
+
+            return;
         }
+
+        setMintCodeJSON(undefined);
+        setMintCodeError(undefined);
     }, [mintCode]);
 
-    // `mintCodeJSON`
-    useEffect(() => {
-        (async () => {
-            if (mintCodeJSON) {
-                const resp = await contract.check(
-                    address,
-                    mintCodeJSON.tokenId,
-                    mintCodeJSON.proofId,
-                    mintCodeJSON.proof,
-                );
+    // prepare `mint`
+    const debouncedMintCodeJSON = useDebounce(mintCodeJSON, 1000);
+    const {
+        config: writeMintConfig,
+        error: prepareWriteMintError,
+        // isIdle: isPrepareWriteMintIdle,
+        // isLoading: isPrepareWriteMintLoading,
+        isFetching: isPrepareWriteMintFetching,
+        // isSuccess: isPrepareWriteMintSuccess,
+        isError: isPrepareWriteMintError,
+        // isFetched: isPrepareWriteMintFetched,
+        // isFetchedAfterMount: isPrepareWriteMintFetchedAfterMount,
+        // isRefetching: isPrepareWriteMintRefetching,
+        // refetch: refetchPrepareWriteMint,
+        // status: prepareWriteMintStatus,
+    } = usePrepareContractWrite({
+        ...MONARCH_MIXER_CONTRACT_CONFIG,
+        functionName: 'mint',
+        args: [
+            debouncedMintCodeJSON?.tokenId,
+            debouncedMintCodeJSON?.proofId,
+            debouncedMintCodeJSON?.proof,
+        ],
+        cacheTime: 13_000,
+        enabled: Boolean(debouncedMintCodeJSON) && !mintCodeError,
+    });
 
-                switch (resp.err) {
-                    case 1:
-                        setMintCodeError('You have claimed before')
-                        break;
-                    case 2:
-                        setMintCodeError('MintCode is already used')
-                        break;
-                    case 3:
-                        setMintCodeError('MintCode is not valid')
-                        break;
-                    case 0:
-                        setMintCodeError(undefined);
-                        break;
-                }
-                console.log(resp);
-            } else {
-                setMintCodeError(undefined);
-            }
-        })();
-    }, [mintCodeJSON, address]);
+    // write `mint`
+    const {
+        data: writeMintTxResp,
+        error: writeMintTxError,
+        isError: isWriteMintError,
+        isIdle: isWriteMintIdle,
+        isLoading: isWriteMintLoading,
+        isSuccess: isWriteMintSuccess,
+        write: writeMint,
+        reset: resetWriteMint,
+        status: writeMintStatus,
+    } = useContractWrite(writeMintConfig);
 
-    // const { writeAsync: mint, error: mintError } = useContractWrite({
-    //     mode: 'recklesslyUnprepared',
-    //     ...MONARCH_MIXER_CONTRACT_CONFIG,
-    //     functionName: 'mint',
-    // });
-
-    // useEffect(() => {
-    //     if (mintError) {
-    //         console.warn('>>> mintError');
-    //         console.error(mintError);
-
-    //         if (mintError.hasOwnProperty('reason')) {
-    //             console.warn(`mintError['reason']`);
-    //             console.error(mintError['reason']);
-
-    //             if (mintError.hasOwnProperty('replacement')) {
-    //                 // tx.value = mintError['replacement'];
-    //                 console.warn(`mintError['replacement']`);
-    //                 console.error(mintError['replacement']);
-    //             }
-
-    //             if (mintError.hasOwnProperty('receipt')) {
-    //                 console.warn(`mintError['receipt']`);
-    //                 console.error(mintError['receipt']);
-    //             }
-    //         }
-    //     }
-    // }, [mintError]);
-
-
-
-    const [mintLoading, setMintLoading] = useState(false);
-
-    const onMintClick = async () => {
-        if (mintCodeJSON) {
-            setMintLoading(true);
-
-            const tx = await contract.mint(
-                mintCodeJSON.tokenId,
-                mintCodeJSON.proofId,
-                mintCodeJSON.proof,
-            );
-
-            // addRecentTransaction({
-            //     hash: tx.hash,
-            //     description: `Mint #${mintCodeJSON.tokenId}`,
-            // });
-
-            const receipt = await tx.wait()
-                .catch((_e: Error) => {
-                    console.warn('>>> tx.wait() catch');
-
-                    if (_e.hasOwnProperty('reason')) {
-                        console.warn(`_e['reason']`);
-                        console.error(_e['reason']);
-                        // _e['reason'];
-
-                        if (_e.hasOwnProperty('replacement')) {
-                            console.warn(`_e['replacement']`);
-                            console.error(_e['replacement']);
-                        }
-
-                        if (_e.hasOwnProperty('receipt')) {
-                            console.warn(`_e['receipt']`);
-                            console.error(_e['receipt']);
-                        }
-                    }
-                });
-
-            if (receipt) {
-                console.log('TX receipt', receipt);
-            }
-
-            setMintLoading(false);
+    // onClick `mint`
+    const handleMint = async () => {
+        if (writeMint) {
+            writeMint();
         }
-    };
+    }
+
+    // `mintCodeErrorMessage`
+    const [mintCodeErrorMessage, setMintCodeErrorMessage] = useState<string>();
+    useEffect(() => {
+        if (!mintCode) {
+            setMintCodeErrorMessage(undefined);
+            return;
+        }
+
+        if (mintCodeError) {
+            setMintCodeErrorMessage(mintCodeError);
+            return;
+        }
+
+        if (prepareWriteMintError) {
+            if (prepareWriteMintError.hasOwnProperty('reason')) {
+                setMintCodeErrorMessage(prepareWriteMintError['reason']);
+            } else {
+                setMintCodeErrorMessage(prepareWriteMintError.message);
+            }
+            return;
+        }
+
+        setMintCodeErrorMessage(undefined);
+    }, [mintCodeError, prepareWriteMintError]);
 
 
+    const DEFAULT_MINT_TEXT = 'Enter Mint-Code to Claim';
+    const [mintButtonText, setMintButtonText] = useState<string>(DEFAULT_MINT_TEXT);
 
+    useEffect(() => {
+        if (mintCodeJSON) {
+            if (isPrepareWriteMintFetching) {
+                setMintButtonText(`Querying...`);
+                return;
+            }
+
+            if (mintCodeErrorMessage) {
+                setMintButtonText(`Cannot claim TokenID#${mintCodeJSON.tokenId}`);
+                return;
+            }
+
+            setMintButtonText(`Claim TokenID#${mintCodeJSON.tokenId}`);
+            return;
+        }
+
+        setMintButtonText(DEFAULT_MINT_TEXT);
+    }, [mintCodeJSON, mintCodeErrorMessage, isPrepareWriteMintFetching]);
+
+
+    const Info = () => {
+        return (
+            <>
+                <div className="mt-4">
+                    <p className="text-indigo-300">
+                        --- PREPARE ---
+                    </p>
+                    {/* <p>
+                    isPrepareWriteMintIdle: {isPrepareWriteMintIdle.toString()}
+                </p>
+                <p>
+                    isPrepareWriteMintLoading: {isPrepareWriteMintLoading.toString()}
+                </p> */}
+                    <p>
+                        isPrepareWriteMintFetching: {isPrepareWriteMintFetching.toString()}
+                    </p>
+                    {/* <p>
+                    isPrepareWriteMintSuccess: {isPrepareWriteMintSuccess.toString()}
+                </p> */}
+                    <p>
+                        isPrepareWriteMintError: {isPrepareWriteMintError.toString()}
+                    </p>
+                    {/* <p>
+                    isPrepareWriteMintFetched: {isPrepareWriteMintFetched.toString()}
+                </p>
+                <p>
+                    isPrepareWriteMintRefetching: {isPrepareWriteMintRefetching.toString()}
+                </p>
+                <p>
+                    prepareWriteMintStatus: {prepareWriteMintStatus.toString()}
+                </p> */}
+                </div>
+
+                <div className="mt-4">
+                    <p className="text-indigo-300">
+                        --- WRITE ---
+                    </p>
+                    <p>
+                        writeMintTxResp.hash: {writeMintTxResp?.hash}
+                    </p>
+                    <p>
+                        writeMintTxError: {writeMintTxError && (JSON.stringify(writeMintTxError))}
+                    </p>
+                    <p>
+                        isWriteMintError: {isWriteMintError.toString()}
+                    </p>
+                    <p>
+                        isWriteMintIdle: {isWriteMintIdle.toString()}
+                    </p>
+                    <p>
+                        isWriteMintLoading: {isWriteMintLoading.toString()}
+                    </p>
+                    <p>
+                        isWriteMintSuccess: {isWriteMintSuccess.toString()}
+                    </p>
+                    <p>
+                        writeMintStatus: {writeMintStatus}
+                    </p>
+                </div>
+            </>
+        );
+    }
 
 
     return (
         <div>
-            <p>Mint Code</p>
+            {mintCodeJSON && (
+                <div className="flex justify-center">
+                    <div className="shrink mx-auto border-2 border-gray-500 p-12">
+                        #{mintCodeJSON.tokenId}
+                    </div>
+                </div>
+            )}
+
             <div>
-                <input
-                    type="text"
-                    onKeyUp={(e) => setMintCode(e.currentTarget.value)}
-                    className="text-gray-500"
-                />
+                <label>Mint Code</label>
+                <div>
+                    <input
+                        type="text"
+                        onKeyUp={(e) => setMintCode(e.currentTarget.value.trim())}
+                        className="text-gray-500"
+                    />
+                </div>
+
+                {mintCodeErrorMessage && (
+                    <div className="text-rose-400">
+                        {mintCodeErrorMessage}
+                    </div>
+                )}
+
             </div>
-            <p>
-                {mintCodeError}
-            </p>
-            <button onClick={onMintClick}>Mint</button>
-            <p>
-                mintLoading: {mintLoading.toString()}
-            </p>
+            <button
+                disabled={!writeMint || !isWriteMintIdle}
+                onClick={handleMint}
+                className="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+            >
+                {mintButtonText}
+            </button>
+
+            <Info />
         </div>
     );
 }

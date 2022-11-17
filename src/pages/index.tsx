@@ -7,8 +7,6 @@ import Head from "next/head";
 import Account from "../components/Debug/Account";
 import Max7 from "../components/Layout/max7";
 import Mint from "../components/Monarch/mint";
-import Mint2 from "../components/Monarch/mint2";
-
 
 
 const Home: NextPage = () => {
@@ -22,11 +20,11 @@ const Home: NextPage = () => {
             <div>
                 <div className="bg-gray-800">
                     <Max7>
+                        {/* <div className="py-12">
+                            <Mint />
+                        </div> */}
                         <div className="py-12">
                             <Mint />
-                        </div>
-                        <div className="py-12">
-                            <Mint2 />
                         </div>
                     </Max7>
                 </div>
