@@ -4,16 +4,16 @@ import { useAccount } from "wagmi";
 
 
 export default function Account() {
-    const _account = useAccount();
-    const [account, setAccount] = useState<GetAccountResult>();
+    const { address: _address } = useAccount();
+    const [address, setAddress] = useState<string>();
 
     useEffect(() => {
-        setAccount(_account);
-    }, [_account.address]);
+        setAddress(_address);
+    }, [_address]);
 
     return (
         <div>
-            <p>Account: {account ? account.address : ''}</p>
+            <p>Account: {address ? address : ''}</p>
         </div>
     );
 }
