@@ -42,7 +42,7 @@ const ethereumPoWChainMainnet: Chain = {
 
 export const { chains, provider, webSocketProvider } = configureChains(
     [
-        chain.mainnet,
+        // chain.mainnet,
         chain.goerli,
         // ethereumPoWChainMainnet,
     ],
