@@ -11,14 +11,14 @@ function classNames(...classes: string[]) {
 }
 
 const MONARCH_MIXER_CONTRACT_CONFIG = {
-    addressOrName: '0x60B2D8fF61EA7adbee55BfC574F68AFFBaA9441b',
-    contractInterface: CONTRACT_ABI,
+    address: '0x60B2D8fF61EA7adbee55BfC574F68AFFBaA9441b',
+    abi: CONTRACT_ABI,
 };
 
 interface MintCodeJSON {
     tokenId: number,
     proofId: number,
-    proof: string[],
+    proof: readonly `0x${string}`[],
 }
 
 const product = {
@@ -103,11 +103,11 @@ const Mint = () => {
     } = usePrepareContractWrite({
         ...MONARCH_MIXER_CONTRACT_CONFIG,
         functionName: 'mint',
-        args: [
-            debouncedMintCodeJSON?.tokenId,
-            debouncedMintCodeJSON?.proofId,
-            debouncedMintCodeJSON?.proof,
-        ],
+        args: debouncedMintCodeJSON ? [
+            ethers.BigNumber.from(debouncedMintCodeJSON.tokenId),
+            ethers.BigNumber.from(debouncedMintCodeJSON.proofId),
+            debouncedMintCodeJSON.proof,
+        ] : undefined,
         cacheTime: 13_000,
         enabled: Boolean(debouncedMintCodeJSON) && !mintCodeError,
     });
@@ -120,15 +120,26 @@ const Mint = () => {
         isIdle: isWriteMintIdle,
         isLoading: isWriteMintLoading,
         isSuccess: isWriteMintSuccess,
-        write: writeMint,
+        writeAsync: writeMint,
         reset: resetWriteMint,
         status: writeMintStatus,
     } = useContractWrite(writeMintConfig);
 
     // onClick `mint`
-    const handleMint = async () => {
+    const onClickMint = async () => {
         if (writeMint) {
-            writeMint();
+            const tx = await writeMint();
+
+            tx
+                .wait()
+                .then(() => {
+                    console.log('mint success');
+                })
+                .catch((e: Error) => {
+
+                });
+
+            // writeMintTxResp?.wait().then(() => { });
         }
     }
 
@@ -263,7 +274,7 @@ const Mint = () => {
                             </span>
                         </dt>
                         <dd className="font-medium text-gray-400">
-                            {MONARCH_MIXER_CONTRACT_CONFIG.addressOrName}
+                            {MONARCH_MIXER_CONTRACT_CONFIG.address}
                         </dd>
                     </dl>
                     <div className="mt-4 sm:mt-0">
@@ -316,7 +327,7 @@ const Mint = () => {
                                     <div className="flex justify-center">
                                         <button
                                             disabled={!writeMint || !isWriteMintIdle}
-                                            onClick={handleMint}
+                                            onClick={onClickMint}
                                             className="w-full inline-flex justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-sm font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 text-center"
                                         >
                                             {mintButtonText}
