@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ethers } from 'ethers';
-import { useAccount, useContractWrite, usePrepareContractWrite } from "wagmi";
+import {
+    useAccount,
+    usePrepareContractWrite,
+    useContractWrite,
+    useWaitForTransaction,
+} from "wagmi";
 import { useDebounce } from 'usehooks-ts';
 import CONTRACT_ABI from '../../config/abi/monarchMixer';
 import Max7 from "../../components/Layout/max7";
@@ -11,14 +16,14 @@ function classNames(...classes: string[]) {
 }
 
 const MONARCH_MIXER_CONTRACT_CONFIG = {
-    addressOrName: '0x60B2D8fF61EA7adbee55BfC574F68AFFBaA9441b',
-    contractInterface: CONTRACT_ABI,
+    address: '0x60B2D8fF61EA7adbee55BfC574F68AFFBaA9441b',
+    abi: CONTRACT_ABI,
 };
 
 interface MintCodeJSON {
     tokenId: number,
     proofId: number,
-    proof: string[],
+    proof: readonly `0x${string}`[],
 }
 
 const product = {
@@ -85,50 +90,25 @@ const Mint = () => {
         setMintCodeError(undefined);
     }, [mintCode]);
 
-    // prepare `mint`
+    // prepare and `mint`
     const debouncedMintCodeJSON = useDebounce(mintCodeJSON, 1000);
-    const {
-        config: writeMintConfig,
-        error: prepareWriteMintError,
-        // isIdle: isPrepareWriteMintIdle,
-        // isLoading: isPrepareWriteMintLoading,
-        isFetching: isPrepareWriteMintFetching,
-        // isSuccess: isPrepareWriteMintSuccess,
-        isError: isPrepareWriteMintError,
-        // isFetched: isPrepareWriteMintFetched,
-        // isFetchedAfterMount: isPrepareWriteMintFetchedAfterMount,
-        // isRefetching: isPrepareWriteMintRefetching,
-        // refetch: refetchPrepareWriteMint,
-        // status: prepareWriteMintStatus,
-    } = usePrepareContractWrite({
+    const prepareMint = usePrepareContractWrite({
         ...MONARCH_MIXER_CONTRACT_CONFIG,
         functionName: 'mint',
-        args: [
-            debouncedMintCodeJSON?.tokenId,
-            debouncedMintCodeJSON?.proofId,
-            debouncedMintCodeJSON?.proof,
-        ],
+        args: debouncedMintCodeJSON ? [
+            ethers.BigNumber.from(debouncedMintCodeJSON.tokenId),
+            ethers.BigNumber.from(debouncedMintCodeJSON.proofId),
+            debouncedMintCodeJSON.proof,
+        ] : undefined,
         cacheTime: 13_000,
         enabled: Boolean(debouncedMintCodeJSON) && !mintCodeError,
     });
-
-    // write `mint`
-    const {
-        data: writeMintTxResp,
-        error: writeMintTxError,
-        isError: isWriteMintError,
-        isIdle: isWriteMintIdle,
-        isLoading: isWriteMintLoading,
-        isSuccess: isWriteMintSuccess,
-        write: writeMint,
-        reset: resetWriteMint,
-        status: writeMintStatus,
-    } = useContractWrite(writeMintConfig);
+    const writeMint = useContractWrite(prepareMint?.data);
 
     // onClick `mint`
-    const handleMint = async () => {
-        if (writeMint) {
-            writeMint();
+    const onClickMint = async () => {
+        if (writeMint?.write) {
+            writeMint.write();
         }
     }
 
@@ -145,17 +125,17 @@ const Mint = () => {
             return;
         }
 
-        if (prepareWriteMintError) {
-            if (prepareWriteMintError.hasOwnProperty('reason')) {
-                setMintCodeErrorMessage(prepareWriteMintError['reason']);
+        if (prepareMint?.error) {
+            if (prepareMint.error.hasOwnProperty('reason')) {
+                setMintCodeErrorMessage(prepareMint.error['reason']);
             } else {
-                setMintCodeErrorMessage(prepareWriteMintError.message);
+                setMintCodeErrorMessage(prepareMint.error.message);
             }
             return;
         }
 
         setMintCodeErrorMessage(undefined);
-    }, [mintCode, mintCodeError, prepareWriteMintError]);
+    }, [mintCode, mintCodeError, prepareMint]);
 
 
     const DEFAULT_MINT_TEXT = 'Enter Mint-Code to Claim';
@@ -163,7 +143,7 @@ const Mint = () => {
 
     useEffect(() => {
         if (mintCodeJSON) {
-            if (isPrepareWriteMintFetching) {
+            if (prepareMint?.isFetching) {
                 setMintButtonText(`Querying...`);
                 return;
             }
@@ -178,7 +158,7 @@ const Mint = () => {
         }
 
         setMintButtonText(DEFAULT_MINT_TEXT);
-    }, [mintCodeJSON, mintCodeErrorMessage, isPrepareWriteMintFetching]);
+    }, [mintCodeJSON, mintCodeErrorMessage, prepareMint]);
 
 
 
@@ -215,30 +195,25 @@ const Mint = () => {
     const DebugInfo = () => {
         return (
             <div className="mt-4">
+
+                <p className="text-indigo-300">
+                    --- PREPARE ---
+                </p>
+                <p>
+                    {prepareMint && (
+                        JSON.stringify(prepareMint)
+                    )}
+                </p>
+
                 <p className="text-indigo-300">
                     --- WRITE ---
                 </p>
                 <p>
-                    writeMintTxResp.hash: {writeMintTxResp?.hash}
+                    {writeMint && (
+                        JSON.stringify(writeMint)
+                    )}
                 </p>
-                <p>
-                    writeMintTxError: {writeMintTxError && (JSON.stringify(writeMintTxError))}
-                </p>
-                <p>
-                    isWriteMintError: {isWriteMintError.toString()}
-                </p>
-                <p>
-                    isWriteMintIdle: {isWriteMintIdle.toString()}
-                </p>
-                <p>
-                    isWriteMintLoading: {isWriteMintLoading.toString()}
-                </p>
-                <p>
-                    isWriteMintSuccess: {isWriteMintSuccess.toString()}
-                </p>
-                <p>
-                    writeMintStatus: {writeMintStatus}
-                </p>
+
             </div>
         );
     }
@@ -263,7 +238,7 @@ const Mint = () => {
                             </span>
                         </dt>
                         <dd className="font-medium text-gray-400">
-                            {MONARCH_MIXER_CONTRACT_CONFIG.addressOrName}
+                            {MONARCH_MIXER_CONTRACT_CONFIG.address}
                         </dd>
                     </dl>
                     <div className="mt-4 sm:mt-0">
@@ -315,8 +290,8 @@ const Mint = () => {
                                     )}
                                     <div className="flex justify-center">
                                         <button
-                                            disabled={!writeMint || !isWriteMintIdle}
-                                            onClick={handleMint}
+                                            disabled={!writeMint.write || !writeMint.isIdle}
+                                            onClick={onClickMint}
                                             className="w-full inline-flex justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-sm font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 text-center"
                                         >
                                             {mintButtonText}
