@@ -13,9 +13,9 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div>
-                <div className="bg-gray-900">
+                {/* <div className="bg-gray-900">
                     <Logo />
-                </div>
+                </div> */}
                 <div className="bg-gray-800">
                     <Mint />
                 </div>

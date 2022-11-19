@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useDebounce } from 'usehooks-ts';
 import { ethers } from 'ethers';
 import {
     useAccount,
@@ -7,13 +9,11 @@ import {
     useContractWrite,
     useWaitForTransaction,
 } from "wagmi";
-import { useDebounce } from 'usehooks-ts';
-import CONTRACT_ABI from '../../config/abi/monarchMixer';
-import Max7 from "../../components/Layout/max7";
+import { ChevronRightIcon } from '@heroicons/react/20/solid'
 
-function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ');
-}
+import CONTRACT_ABI from '../../config/abi/monarchMixer';
+
+import FCTxStatus from "../../components/Tx/status";
 
 const MONARCH_MIXER_CONTRACT_CONFIG = {
     address: '0x60B2D8fF61EA7adbee55BfC574F68AFFBaA9441b',
@@ -26,46 +26,12 @@ interface MintCodeJSON {
     proof: readonly `0x${string}`[],
 }
 
-const product = {
-    id: 1,
-    name: 'Distant Mountains Artwork Tee',
-    price: '$36.00',
-    description: 'You awake in a new, mysterious land. Mist hangs low along the distant mountains. What does it mean?',
-    address: ['Floyd Miles', '7363 Cynthia Pass', 'Toronto, ON N3Y 4H8'],
-    email: 'f•••@example.com',
-    phone: '1•••••••••40',
-    href: '#',
-    status: 'Processing',
-    step: 1,
-    date: 'March 24, 2021',
-    datetime: '2021-03-24',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/confirmation-page-04-product-01.jpg',
-    imageAlt: 'Off-white t-shirt with circular dot illustration on the front of mountain ridges that fade.',
-}
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const Mint = () => {
+export default function Example() {
     const { address } = useAccount();
 
     // `mintCode`
@@ -104,6 +70,32 @@ const Mint = () => {
         enabled: Boolean(debouncedMintCodeJSON) && !mintCodeError,
     });
     const writeMint = useContractWrite(prepareMint?.data);
+    const waitForMintTx = useWaitForTransaction({
+        hash: writeMint?.data?.hash,
+        confirmations: 1,
+        enabled: Boolean(writeMint?.data),
+        timeout: 600_000,
+        onSuccess(data) {
+            console.warn('Success', data)
+        },
+        onError(error) {
+            console.warn('Error', error)
+        },
+    });
+
+    // TODO: onSuccess, set status
+    enum TxStatus {
+        Idle,
+        Error,
+        Loading,
+        Success,
+    }
+    const [txStatus, setTxStatus] = useState<TxStatus>(TxStatus.Idle);
+
+    // useEffect(() => {
+    //     console.log('waitForMintTx');
+    //     console.log(waitForMintTx);
+    // }, [waitForMintTx])
 
     // onClick `mint`
     const onClickMint = async () => {
@@ -138,10 +130,44 @@ const Mint = () => {
     }, [mintCode, mintCodeError, prepareMint]);
 
 
-    const DEFAULT_MINT_TEXT = 'Enter Mint-Code to Claim';
+    const DEFAULT_MINT_TEXT = 'Enter Mint-Code to Claim XXX';
     const [mintButtonText, setMintButtonText] = useState<string>(DEFAULT_MINT_TEXT);
 
+    const btnText = () => {
+        if (mintCodeJSON) {
+            if (prepareMint?.isFetching) {
+                return `Querying...`;
+            }
+
+            if (mintCodeErrorMessage) {
+                return `Can NOT claim TokenID#${mintCodeJSON.tokenId}`;
+            }
+
+            return `Claim TokenID#${mintCodeJSON.tokenId}`;
+        }
+
+        return DEFAULT_MINT_TEXT;
+    }
+
+
     useEffect(() => {
+        if (waitForMintTx) {
+            if (waitForMintTx.isLoading || waitForMintTx.isFetching) {
+                setMintButtonText(`Claiming...`);
+                return;
+            }
+
+            if (waitForMintTx.isSuccess) {
+                setMintButtonText(`Claim Successfully`);
+                return;
+            }
+
+            if (waitForMintTx.isError) {
+                setMintButtonText(`Claim Failed`);
+                return;
+            }
+        }
+
         if (mintCodeJSON) {
             if (prepareMint?.isFetching) {
                 setMintButtonText(`Querying...`);
@@ -158,7 +184,7 @@ const Mint = () => {
         }
 
         setMintButtonText(DEFAULT_MINT_TEXT);
-    }, [mintCodeJSON, mintCodeErrorMessage, prepareMint]);
+    }, [mintCodeJSON, mintCodeErrorMessage, prepareMint, waitForMintTx]);
 
 
 
@@ -179,161 +205,142 @@ const Mint = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     const DebugInfo = () => {
         return (
             <div className="mt-4">
 
-                <p className="text-indigo-300">
+                {/* <p className="text-indigo-300">
                     --- PREPARE ---
                 </p>
                 <p>
                     {prepareMint && (
                         JSON.stringify(prepareMint)
                     )}
-                </p>
+                </p> */}
 
                 <p className="text-indigo-300">
                     --- WRITE ---
                 </p>
-                <p>
-                    {writeMint && (
-                        JSON.stringify(writeMint)
-                    )}
+                {writeMint && (
+                    <p>
+                        {JSON.stringify(writeMint)}
+                    </p>
+                )}
+
+                <p className="text-indigo-300">
+                    --- WAIT ---
                 </p>
 
+                <FCTxStatus waitForTx={waitForMintTx} />
             </div>
         );
     }
 
 
+    const Tip = () => {
+        return (
+            <>
+                {!mintCode && (
+                    <p className="mt-3 text-sm text-gray-300 sm:mt-4">
+                        Please enter Mint-Code then claim your Monarch-Mixer...
+                    </p>
+                )}
+                {!mintCodeErrorMessage && (
+                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
+                        Error Message...
+                    </p>
+                )}
+                <p className="mt-3 text-sm text-rose-300 sm:mt-4">
+                    {mintCodeErrorMessage}
+                </p>
+
+                <p className="mt-3 text-sm text-green-300 sm:mt-4">
+                    Claimed Successfully...
+                </p>
+            </>
+        );
+    }
+
+
+
     return (
-        <div>
-            <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-                <h1 className="text-3xl font-bold tracking-tight text-gray-100">
-                    Claim your MonarchMixer NFT
-                </h1>
-
-                <div className="mt-2 border-b border-gray-600 pb-5 text-sm sm:flex sm:justify-between">
-                    <dl className="flex">
-                        <dt className="text-gray-300">
-                            ERC1155
-                        </dt>
-                        <dt>
-                            <span className="sr-only">Date</span>
-                            <span className="mx-2 text-gray-300" aria-hidden="true">
-                                &middot;
-                            </span>
-                        </dt>
-                        <dd className="font-medium text-gray-400">
-                            {MONARCH_MIXER_CONTRACT_CONFIG.address}
-                        </dd>
-                    </dl>
-                    <div className="mt-4 sm:mt-0">
-                        <a href="#" className="font-medium text-indigo-400 hover:text-indigo-300">
-                            Explore on OpenSEA
-                            <span aria-hidden="true"> &rarr;</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div className="mt-8">
-                    <h2 className="sr-only">
-                        Products purchased
-                    </h2>
-
-                    <div className="space-y-24">
-                        <div className="grid grid-cols-1 text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-8">
-                            <div className="sm:col-span-4 md:col-span-5 md:row-span-2 md:row-end-2">
-                                <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-50">
-                                    <img src={tokenMeta.imageSrc} alt={tokenMeta.imageAlt} className="object-cover object-center" />
+        <>
+            <div className="relative overflow-hidden">
+                <div className="bg-gray-900 pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8 lg:pb-14">
+                    <div className="mx-auto max-w-7xl lg:px-8">
+                        <div className="lg:grid lg:grid-cols-2 lg:gap-8">
+                            <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:flex lg:items-center lg:px-0 lg:text-left">
+                                <div className="lg:py-24">
+                                    <a
+                                        href="#"
+                                        className="inline-flex items-center rounded-full bg-black p-1 pr-2 text-white hover:text-gray-200 sm:text-base lg:text-sm xl:text-base"
+                                    >
+                                        <span className="rounded-full bg-indigo-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">
+                                            Discord
+                                        </span>
+                                        <span className="ml-4 text-sm">
+                                            Welcome to Monarch Family
+                                        </span>
+                                        <ChevronRightIcon className="ml-2 h-5 w-5 text-gray-500" aria-hidden="true" />
+                                    </a>
+                                    <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
+                                        <span className="block">
+                                            Claim Monarch-Mixer
+                                        </span>
+                                        <span className="block text-indigo-400">
+                                            Join our Journey
+                                        </span>
+                                    </h1>
+                                    <p className="mt-3 text-base text-gray-400 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                                        Monarch Mixer are NFT mementos, minted in recognition for our early supporters.
+                                    </p>
+                                    <div className="mt-10 sm:mt-12">
+                                        <div className="sm:mx-auto sm:max-w-xl lg:mx-0">
+                                            <div className="sm:flex">
+                                                <div className="min-w-0 flex-1">
+                                                    <label htmlFor="mint-code" className="sr-only">
+                                                        Mint-Code
+                                                    </label>
+                                                    <input
+                                                        id="mint-code"
+                                                        type="mint-code"
+                                                        onChange={(e) => setMintCode(e.currentTarget.value.trim())}
+                                                        placeholder="Enter your Mint-Code"
+                                                        className="block w-full rounded-md border-0 px-4 py-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900"
+                                                    />
+                                                </div>
+                                                <div className="mt-3 sm:mt-0 sm:ml-3">
+                                                    <button
+                                                        type="button"
+                                                        disabled={!writeMint.write || !writeMint.isIdle}
+                                                        onClick={onClickMint}
+                                                        className="block w-full rounded-md bg-indigo-500 py-3 px-4 font-medium text-white shadow hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900"
+                                                    >
+                                                        Claim Now
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <Tip />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="mt-6 sm:col-span-7 sm:mt-0 md:row-end-1">
-                                <h3 className="text-lg font-medium text-gray-100">
-                                    Claim by using a valid Mint-Code
-                                </h3>
-                                <p className="mt-1 font-medium text-gray-400">
-                                    FREE MINT
-                                </p>
-                                <p className="mt-3 text-gray-300">
-                                    Nulla mattis eros eu orci volutpat feugiat. Fusce faucibus porta ligula.
-                                </p>
-                            </div>
-                            <div className="sm:col-span-12 md:col-span-7">
-                                <div className="border-b border-gray-600 py-8 space-y-2">
-                                    <div>
-                                        <textarea
-                                            rows={4}
-                                            onKeyUp={(e) => setMintCode(e.currentTarget.value.trim())}
-                                            className="block w-full rounded-md bg-gray-700 border-gray-600 shadow-sm focus:border-indigo-400 focus:ring-indigo-400 font-mono text-sm sm:text-base text-gray-300"
-                                            placeholder="Enter your Mint-Code here"
-                                            defaultValue={''}
-                                        />
-                                    </div>
-                                    {mintCodeErrorMessage && (
-                                        <div className="text-rose-400">
-                                            {mintCodeErrorMessage}
-                                        </div>
-                                    )}
-                                    <div className="flex justify-center">
-                                        <button
-                                            disabled={!writeMint.write || !writeMint.isIdle}
-                                            onClick={onClickMint}
-                                            className="w-full inline-flex justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-sm font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700 text-center"
-                                        >
-                                            {mintButtonText}
-                                        </button>
-                                    </div>
+                            <div className="mt-12 -mb-16 sm:-mb-48 lg:relative lg:m-0">
+                                <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
+                                    <img
+                                        className="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
+                                        src="https://tailwindui.com/img/component-images/cloud-illustration-indigo-400.svg"
+                                        alt=""
+                                    />
                                 </div>
-                                {/* <p className="mt-6 font-medium text-gray-400 md:mt-10">
-                                    Processing...
-                                </p>
-                                <div className="mt-6">
-                                    <div className="overflow-hidden rounded-full bg-gray-700">
-                                        <div
-                                            className="h-2 rounded-full bg-indigo-300"
-                                            style={{ width: `calc((${product.step} * 2 + 1) / 8 * 100%)` }}
-                                        />
-                                    </div>
-                                    <div className="mt-6 hidden grid-cols-4 font-medium text-gray-400 sm:grid">
-                                        <div className="text-indigo-400">
-                                            Mixer Ready
-                                        </div>
-                                        <div className={classNames(product.step > 0 ? 'text-indigo-300' : '', 'text-center')}>
-                                            Enter Mint Code
-                                        </div>
-                                        <div className={classNames(product.step > 1 ? 'text-indigo-300' : '', 'text-center')}>
-                                            Claim/Mint
-                                        </div>
-                                        <div className={classNames(product.step > 2 ? 'text-indigo-300' : '', 'text-right')}>
-                                            Recieved
-                                        </div>
-                                    </div>
-                                </div> */}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <Max7>
+            <div className="mx-auto max-w-7xl lg:px-8">
                 <DebugInfo />
-            </Max7>
-        </div>
-    );
+            </div>
+        </>
+    )
 }
-
-export default Mint;
