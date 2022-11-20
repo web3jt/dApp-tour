@@ -10,13 +10,12 @@ import Max7 from "../components/Layout/max7";
 import Mint from "../components/Monarch/mint";
 
 
-const Home: NextPage = () => {
+const Page: NextPage = () => {
     return (
         <div>
             <Head>
                 <title>RainbowKit DEMO</title>
                 <meta name="description" content="RainbowKit DEMO, with wagmi, react, next" />
-                <link rel="icon" href="/favicon.ico" />
             </Head>
             <div>
                 <Max7>
@@ -29,4 +28,4 @@ const Home: NextPage = () => {
     );
 };
 
-export default Home;
+export default Page;
