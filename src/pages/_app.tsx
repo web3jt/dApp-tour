@@ -16,10 +16,10 @@ import Layout from '../components/Layout';
 
 
 function DApp({ Component, pageProps }: AppProps) {
-    // const [mounted, setMounted] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
-    // useEffect(() => setMounted(true), []);
-    // if (!mounted) return null;
+    useEffect(() => setMounted(true), []);
+    if (!mounted) return null;
 
     return (
         <WagmiConfig client={wagmiClient}>
