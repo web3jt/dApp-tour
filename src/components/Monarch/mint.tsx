@@ -26,10 +26,12 @@ interface MintCodeJSON {
     proof: readonly `0x${string}`[],
 }
 
-
-
-
-
+function isMintCodeJSON(obj: any): obj is MintCodeJSON {
+    if (typeof obj.tokenId !== 'number') return false;
+    if (typeof obj.proofId !== 'number') return false;
+    if (!Array.isArray(obj.proof)) return false;
+    return true;
+}
 
 export default function Example() {
     const { address } = useAccount();
@@ -39,9 +41,19 @@ export default function Example() {
     const [mintCodeError, setMintCodeError] = useState<string>();
     const [mintCodeJSON, setMintCodeJSON] = useState<MintCodeJSON>();
     useEffect(() => {
+        writeMint.reset();
+
         if (mintCode) {
             try {
                 const strJson = new TextDecoder().decode(ethers.utils.base58.decode(mintCode));
+                const json = JSON.parse(strJson);
+
+                if (!isMintCodeJSON(json)) {
+                    setMintCodeJSON(undefined);
+                    setMintCodeError('MintCode: invalid');
+                    return;
+                }
+
                 setMintCodeJSON(JSON.parse(strJson));
                 setMintCodeError(undefined);
             } catch (e) {
@@ -70,6 +82,9 @@ export default function Example() {
         enabled: Boolean(debouncedMintCodeJSON) && !mintCodeError,
     });
     const writeMint = useContractWrite(prepareMint?.data);
+
+
+    const [txSuccess, setTxSuccess] = useState<boolean>();
     const waitForMintTx = useWaitForTransaction({
         hash: writeMint?.data?.hash,
         confirmations: 1,
@@ -82,6 +97,28 @@ export default function Example() {
             console.warn('Error', error)
         },
     });
+
+
+    // const txTip = () => {
+    //     if (txSuccess !== undefined) {
+
+    //     }
+    // }
+
+    // const
+
+    // const [indicator, setIndicator] = useState<string>('');
+    // const [statusClassName, setStatusClassName] = useState<string>('');
+
+    // write, tx pending
+    // write, tx success
+    // write, tx error
+    // prepare, success
+    // prepare, error
+    // mintCode, empty
+
+
+
 
     // TODO: onSuccess, set status
     enum TxStatus {
@@ -237,28 +274,140 @@ export default function Example() {
     }
 
 
-    const Tip = () => {
-        return (
-            <>
-                {!mintCode && (
-                    <p className="mt-3 text-sm text-gray-300 sm:mt-4">
-                        Please enter Mint-Code then claim your Monarch-Mixer...
-                    </p>
-                )}
-                {!mintCodeErrorMessage && (
-                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
-                        Error Message...
-                    </p>
-                )}
-                <p className="mt-3 text-sm text-rose-300 sm:mt-4">
-                    {mintCodeErrorMessage}
-                </p>
-
+    const Status = () => {
+        if (waitForMintTx?.isSuccess) {
+            return (
                 <p className="mt-3 text-sm text-green-300 sm:mt-4">
-                    Claimed Successfully...
+                    Claim Successfully!
                 </p>
-            </>
-        );
+            );
+        }
+
+        if (waitForMintTx?.isLoading) {
+            return (
+                <p className="mt-3 text-sm text-gray-300 sm:mt-4">
+                    Pending...
+                </p>
+            );
+        }
+
+        if (writeMint?.isLoading) {
+            return (
+                <p className="mt-3 text-sm text-green-300 sm:mt-4">
+                    Wait for authorization...
+                </p>
+            );
+        }
+
+        if (waitForMintTx?.error) {
+            if (waitForMintTx.error.hasOwnProperty('reason')) {
+                return (
+                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
+                        {waitForMintTx.error['reason']}
+                    </p>
+                );
+            } else {
+                return (
+                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
+                        {waitForMintTx.error.message}
+                    </p>
+                );
+            }
+        }
+
+        if (writeMint?.error) {
+            if (writeMint.error.hasOwnProperty('reason')) {
+                return (
+                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
+                        {writeMint.error['reason']}
+                    </p>
+                );
+            } else {
+                return (
+                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
+                        {writeMint.error.message}
+                    </p>
+                );
+            }
+        }
+
+        if (prepareMint?.isLoading) {
+            return (
+                <p className="mt-3 text-sm text-gray-300 sm:mt-4">
+                    Querying...
+                </p>
+            );
+        }
+
+        if (prepareMint?.error) {
+            if (prepareMint.error.hasOwnProperty('reason')) {
+                return (
+                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
+                        {prepareMint.error['reason']}
+                    </p>
+                );
+            } else {
+                return (
+                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
+                        {prepareMint.error.message}
+                    </p>
+                );
+            }
+        }
+
+        if (mintCodeError) {
+            return (
+                <p className="mt-3 text-sm text-rose-300 sm:mt-4">
+                    {mintCodeError}
+                </p>
+            );
+        }
+
+        if (!mintCode) {
+            return (
+                <p className="mt-3 text-sm text-gray-300 sm:mt-4">
+                    Please enter Mint-Code then claim your Monarch-Mixer...
+                </p>
+            );
+        }
+
+        if (mintCodeJSON) {
+            return (
+                <p className="mt-3 text-sm text-gray-300 sm:mt-4">
+                    You can claim MonarchMixer: TokenID#{mintCodeJSON.tokenId}
+                </p>
+            );
+        }
+
+
+
+
+
+
+
+
+
+        // return (
+        //     <>
+        //         {!mintCode && (
+        //             <p className="mt-3 text-sm text-gray-300 sm:mt-4">
+        //                 Please enter Mint-Code then claim your Monarch-Mixer...
+        //             </p>
+        //         )}
+        //         {!mintCodeErrorMessage && (
+        //             <p className="mt-3 text-sm text-rose-300 sm:mt-4">
+        //                 Error Message...
+        //             </p>
+        //         )}
+        //         <p className="mt-3 text-sm text-rose-300 sm:mt-4">
+        //             {mintCodeErrorMessage}
+        //         </p>
+
+        //         <p className="mt-3 text-sm text-green-300 sm:mt-4">
+        //             Claimed Successfully...
+        //         </p>
+        //     </>
+        // );
     }
 
 
@@ -312,7 +461,7 @@ export default function Example() {
                                                 <div className="mt-3 sm:mt-0 sm:ml-3">
                                                     <button
                                                         type="button"
-                                                        disabled={!writeMint.write || !writeMint.isIdle}
+                                                        disabled={!writeMint.write || writeMint.isLoading || waitForMintTx?.isLoading}
                                                         onClick={onClickMint}
                                                         className="block w-full rounded-md bg-indigo-500 py-3 px-4 font-medium text-white shadow hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900"
                                                     >
@@ -320,7 +469,7 @@ export default function Example() {
                                                     </button>
                                                 </div>
                                             </div>
-                                            <Tip />
+                                            <Status />
                                         </div>
                                     </div>
                                 </div>
@@ -340,6 +489,9 @@ export default function Example() {
             </div>
             <div className="mx-auto max-w-7xl lg:px-8">
                 <DebugInfo />
+                {/* <p>
+                    {JSON.stringify(prepareMint)}
+                </p> */}
             </div>
         </>
     )
