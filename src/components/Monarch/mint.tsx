@@ -3,6 +3,7 @@ import { useDebounce } from 'usehooks-ts';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ethers } from 'ethers';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
 import {
     useAccount,
     usePrepareContractWrite,
@@ -36,9 +37,6 @@ const TOKEN_METAS = [
     },
 ]
 
-
-
-
 const MONARCH_MIXER_CONTRACT_CONFIG = {
     address: '0x60B2D8fF61EA7adbee55BfC574F68AFFBaA9441b',
     abi: CONTRACT_ABI,
@@ -58,7 +56,8 @@ function isMintCodeJSON(obj: any): obj is MintCodeJSON {
 }
 
 export default function Example() {
-    const { address } = useAccount();
+    const { address, isConnected } = useAccount();
+    const { openConnectModal } = useConnectModal();
 
     // `mintCode`
     const [mintCode, setMintCode] = useState<string>('');
@@ -186,6 +185,31 @@ export default function Example() {
         message: 'Enter a valid Mint-Code then claim Monarch-Mixer...'
     } as Tip;
 
+    const Button = () => {
+        if (!isConnected) {
+            return (
+                <button
+                    type="button"
+                    onClick={openConnectModal}
+                    className="block w-full rounded-md bg-indigo-500 py-3 px-4 font-medium text-white shadow hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900"
+                >
+                    Connect Wallet
+                </button>
+            )
+        }
+
+        return (
+            <button
+                type="button"
+                disabled={!writeMint.write || writeMint.isLoading || waitForMintTx?.isLoading}
+                onClick={onClickMint}
+                className="block w-full rounded-md bg-indigo-500 py-3 px-4 font-medium text-white shadow hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900"
+            >
+                Claim Now
+            </button>
+        )
+    }
+
 
     // const [tip, setTip] = useState<Tip>(DEFAULT_TIP);
     // useEffect(() => {
@@ -293,12 +317,19 @@ export default function Example() {
 
 
     function getTip(): Tip {
-        console.log('getTip');
+        // console.log('getTip');
+
+        if (!isConnected) {
+            return {
+                type: TipType.Info,
+                message: 'Please connect wallet first...',
+            };
+        }
 
         if (waitForMintTx?.isSuccess) {
             return {
                 type: TipType.Success,
-                message: 'Claim Successfully',
+                message: 'Claim Successfully.',
             };
         }
 
@@ -440,18 +471,13 @@ export default function Example() {
                                                     type="mint-code"
                                                     onChange={(e) => setMintCode(e.currentTarget.value.trim())}
                                                     placeholder="Enter your Mint-Code"
-                                                    className="block w-full rounded-md border-0 px-4 py-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900"
+                                                    className="block w-full rounded-md border-0 px-4 py-3 disabled:bg-gray-300 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:placeholder-gray-400"
+                                                    disabled={!isConnected}
                                                 />
                                             </div>
                                             <div className="mt-3 sm:mt-0 sm:ml-3">
-                                                <button
-                                                    type="button"
-                                                    disabled={!writeMint.write || writeMint.isLoading || waitForMintTx?.isLoading}
-                                                    onClick={onClickMint}
-                                                    className="block w-full rounded-md bg-indigo-500 py-3 px-4 font-medium text-white shadow hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900"
-                                                >
-                                                    Claim Now
-                                                </button>
+
+                                                <Button />
                                             </div>
                                         </div>
                                         <Tip />
@@ -465,6 +491,7 @@ export default function Example() {
                                     className="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
                                     src={tokenMeta.imageSrc}
                                     alt={tokenMeta.imageAlt}
+                                    priority={true}
                                 />
                             </div>
                         </div>
