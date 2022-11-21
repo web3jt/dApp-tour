@@ -13,8 +13,6 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid'
 
 import CONTRACT_ABI from '../../config/abi/monarchMixer';
 
-import FCTxStatus from "../../components/Tx/status";
-
 const MONARCH_MIXER_CONTRACT_CONFIG = {
     address: '0x60B2D8fF61EA7adbee55BfC574F68AFFBaA9441b',
     abi: CONTRACT_ABI,
@@ -26,10 +24,12 @@ interface MintCodeJSON {
     proof: readonly `0x${string}`[],
 }
 
-
-
-
-
+function isMintCodeJSON(obj: any): obj is MintCodeJSON {
+    if (typeof obj.tokenId !== 'number') return false;
+    if (typeof obj.proofId !== 'number') return false;
+    if (!Array.isArray(obj.proof)) return false;
+    return true;
+}
 
 export default function Example() {
     const { address } = useAccount();
@@ -39,9 +39,19 @@ export default function Example() {
     const [mintCodeError, setMintCodeError] = useState<string>();
     const [mintCodeJSON, setMintCodeJSON] = useState<MintCodeJSON>();
     useEffect(() => {
+        writeMint.reset();
+
         if (mintCode) {
             try {
                 const strJson = new TextDecoder().decode(ethers.utils.base58.decode(mintCode));
+                const json = JSON.parse(strJson);
+
+                if (!isMintCodeJSON(json)) {
+                    setMintCodeJSON(undefined);
+                    setMintCodeError('MintCode: invalid');
+                    return;
+                }
+
                 setMintCodeJSON(JSON.parse(strJson));
                 setMintCodeError(undefined);
             } catch (e) {
@@ -83,20 +93,6 @@ export default function Example() {
         },
     });
 
-    // TODO: onSuccess, set status
-    enum TxStatus {
-        Idle,
-        Error,
-        Loading,
-        Success,
-    }
-    const [txStatus, setTxStatus] = useState<TxStatus>(TxStatus.Idle);
-
-    // useEffect(() => {
-    //     console.log('waitForMintTx');
-    //     console.log(waitForMintTx);
-    // }, [waitForMintTx])
-
     // onClick `mint`
     const onClickMint = async () => {
         if (writeMint?.write) {
@@ -130,137 +126,242 @@ export default function Example() {
     }, [mintCode, mintCodeError, prepareMint]);
 
 
-    const DEFAULT_MINT_TEXT = 'Enter Mint-Code to Claim XXX';
-    const [mintButtonText, setMintButtonText] = useState<string>(DEFAULT_MINT_TEXT);
+    // interface TokenMeta {
+    //     imageSrc: string,
+    //     imageAlt: string,
+    // }
 
-    const btnText = () => {
+    // const [tokenMeta, setTokenMeta] = useState<TokenMeta>({
+    //     imageSrc: 'https://tailwindui.com/img/ecommerce-images/confirmation-page-04-product-01.jpg',
+    //     imageAlt: 'Off-white t-shirt with circular dot illustration on the front of mountain ridges that fade.',
+    // });
+
+    enum TipType {
+        Info,
+        Error,
+        Success,
+    }
+
+    type Tip = {
+        type: TipType,
+        message: string,
+    }
+
+    const DEFAULT_TIP = {
+        type: TipType.Info,
+        message: 'Enter a valid Mint-Code then claim Monarch-Mixer...'
+    } as Tip;
+
+
+    // const [tip, setTip] = useState<Tip>(DEFAULT_TIP);
+    // useEffect(() => {
+    //     if (waitForMintTx?.isSuccess) {
+    //         setTip({
+    //             type: TipType.Success,
+    //             message: 'Claim Successfully',
+    //         });
+    //         return;
+    //     }
+
+    //     if (waitForMintTx?.isLoading) {
+    //         setTip({
+    //             type: TipType.Info,
+    //             message: 'Pending...',
+    //         });
+    //         return;
+    //     }
+
+    //     if (writeMint?.isLoading) {
+    //         setTip({
+    //             type: TipType.Info,
+    //             message: 'Wait for authorization...',
+    //         });
+    //         return;
+    //     }
+
+    //     if (waitForMintTx?.error) {
+    //         setTip({
+    //             type: TipType.Error,
+    //             message: (waitForMintTx.error.hasOwnProperty('reason')) ?
+    //                 waitForMintTx.error['reason'] : waitForMintTx.error.message,
+    //         });
+    //         return;
+    //     }
+
+    //     if (writeMint?.error) {
+    //         setTip({
+    //             type: TipType.Error,
+    //             message: (writeMint.error.hasOwnProperty('reason')) ?
+    //                 writeMint.error['reason'] : writeMint.error.message,
+    //         });
+    //         return;
+    //     }
+
+    //     if (prepareMint?.isLoading) {
+    //         setTip({
+    //             type: TipType.Info,
+    //             message: 'Querying...',
+    //         });
+    //         return;
+    //     }
+
+    //     if (prepareMint?.error) {
+    //         setTip({
+    //             type: TipType.Error,
+    //             message: (prepareMint.error.hasOwnProperty('reason')) ?
+    //                 prepareMint.error['reason'] : prepareMint.error.message,
+    //         });
+    //         return;
+    //     }
+
+    //     if (mintCodeError) {
+    //         setTip({
+    //             type: TipType.Error,
+    //             message: mintCodeError
+    //         });
+    //         return;
+    //     }
+
+    //     if (!mintCode) {
+    //         setTip({
+    //             type: TipType.Info,
+    //             message: 'Please enter Mint-Code then claim your Monarch-Mixer...',
+    //         });
+    //         return;
+    //     }
+
+    //     if (mintCodeJSON) {
+    //         setTip({
+    //             type: TipType.Info,
+    //             message: `You can claim MonarchMixer: TokenID#${mintCodeJSON.tokenId}`,
+    //         });
+    //         return;
+    //     }
+
+    //     setTip({
+    //         type: TipType.Info,
+    //         message: 'Enter a valid Mint-Code then claim Monarch-Mixer...',
+    //     });
+
+    // }, [
+    //     mintCode,
+    //     mintCodeJSON,
+    //     mintCodeError,
+    //     prepareMint,
+    //     writeMint,
+    //     waitForMintTx,
+    // ]);
+
+
+
+
+
+
+
+    function getTip(): Tip {
+        console.log('getTip');
+
+        if (waitForMintTx?.isSuccess) {
+            return {
+                type: TipType.Success,
+                message: 'Claim Successfully',
+            };
+        }
+
+        if (waitForMintTx?.isLoading) {
+            return {
+                type: TipType.Info,
+                message: 'Pending...',
+            };
+        }
+
+        if (writeMint?.isLoading) {
+            return {
+                type: TipType.Info,
+                message: 'Wait for authorization...',
+            };
+        }
+
+        if (waitForMintTx?.error) {
+            return {
+                type: TipType.Error,
+                message: (waitForMintTx.error.hasOwnProperty('reason')) ?
+                    waitForMintTx.error['reason'] : waitForMintTx.error.message,
+            };
+        }
+
+        if (writeMint?.error) {
+            return {
+                type: TipType.Error,
+                message: (writeMint.error.hasOwnProperty('reason')) ?
+                    writeMint.error['reason'] : writeMint.error.message,
+            };
+        }
+
+        if (prepareMint?.isLoading) {
+            return {
+                type: TipType.Info,
+                message: 'Querying...',
+            };
+        }
+
+        if (prepareMint?.error) {
+            return {
+                type: TipType.Error,
+                message: (prepareMint.error.hasOwnProperty('reason')) ?
+                    prepareMint.error['reason'] : prepareMint.error.message,
+            };
+        }
+
+        if (mintCodeError) {
+            return {
+                type: TipType.Error,
+                message: mintCodeError
+            };
+        }
+
+        if (!mintCode) {
+            return {
+                type: TipType.Info,
+                message: 'Please enter Mint-Code then claim your Monarch-Mixer...',
+            };
+        }
+
         if (mintCodeJSON) {
-            if (prepareMint?.isFetching) {
-                return `Querying...`;
-            }
-
-            if (mintCodeErrorMessage) {
-                return `Can NOT claim TokenID#${mintCodeJSON.tokenId}`;
-            }
-
-            return `Claim TokenID#${mintCodeJSON.tokenId}`;
+            return {
+                type: TipType.Info,
+                message: `You can claim MonarchMixer: TokenID#${mintCodeJSON.tokenId}`,
+            };
         }
 
-        return DEFAULT_MINT_TEXT;
+        return DEFAULT_TIP;
     }
-
-
-    useEffect(() => {
-        if (waitForMintTx) {
-            if (waitForMintTx.isLoading || waitForMintTx.isFetching) {
-                setMintButtonText(`Claiming...`);
-                return;
-            }
-
-            if (waitForMintTx.isSuccess) {
-                setMintButtonText(`Claim Successfully`);
-                return;
-            }
-
-            if (waitForMintTx.isError) {
-                setMintButtonText(`Claim Failed`);
-                return;
-            }
-        }
-
-        if (mintCodeJSON) {
-            if (prepareMint?.isFetching) {
-                setMintButtonText(`Querying...`);
-                return;
-            }
-
-            if (mintCodeErrorMessage) {
-                setMintButtonText(`Can NOT claim TokenID#${mintCodeJSON.tokenId}`);
-                return;
-            }
-
-            setMintButtonText(`Claim TokenID#${mintCodeJSON.tokenId}`);
-            return;
-        }
-
-        setMintButtonText(DEFAULT_MINT_TEXT);
-    }, [mintCodeJSON, mintCodeErrorMessage, prepareMint, waitForMintTx]);
-
-
-
-
-    interface TokenMeta {
-        imageSrc: string,
-        imageAlt: string,
-    }
-
-    const [tokenMeta, setTokenMeta] = useState<TokenMeta>({
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/confirmation-page-04-product-01.jpg',
-        imageAlt: 'Off-white t-shirt with circular dot illustration on the front of mountain ridges that fade.',
-    });
-
-
-
-
-
-
-
-    const DebugInfo = () => {
-        return (
-            <div className="mt-4">
-
-                {/* <p className="text-indigo-300">
-                    --- PREPARE ---
-                </p>
-                <p>
-                    {prepareMint && (
-                        JSON.stringify(prepareMint)
-                    )}
-                </p> */}
-
-                <p className="text-indigo-300">
-                    --- WRITE ---
-                </p>
-                {writeMint && (
-                    <p>
-                        {JSON.stringify(writeMint)}
-                    </p>
-                )}
-
-                <p className="text-indigo-300">
-                    --- WAIT ---
-                </p>
-
-                <FCTxStatus waitForTx={waitForMintTx} />
-            </div>
-        );
-    }
-
 
     const Tip = () => {
-        return (
-            <>
-                {!mintCode && (
-                    <p className="mt-3 text-sm text-gray-300 sm:mt-4">
-                        Please enter Mint-Code then claim your Monarch-Mixer...
-                    </p>
-                )}
-                {!mintCodeErrorMessage && (
-                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
-                        Error Message...
-                    </p>
-                )}
+        const tip = getTip();
+
+        if (tip.type === TipType.Error) {
+            return (
                 <p className="mt-3 text-sm text-rose-300 sm:mt-4">
-                    {mintCodeErrorMessage}
+                    {tip.message}
                 </p>
+            )
+        }
 
+        if (tip.type === TipType.Success) {
+            return (
                 <p className="mt-3 text-sm text-green-300 sm:mt-4">
-                    Claimed Successfully...
+                    {tip.message}
                 </p>
-            </>
-        );
-    }
+            )
+        }
 
+        return (
+            <p className="mt-3 text-sm text-gray-300 sm:mt-4">
+                {tip.message}
+            </p>
+        )
+    }
 
 
     return (
@@ -312,7 +413,7 @@ export default function Example() {
                                                 <div className="mt-3 sm:mt-0 sm:ml-3">
                                                     <button
                                                         type="button"
-                                                        disabled={!writeMint.write || !writeMint.isIdle}
+                                                        disabled={!writeMint.write || writeMint.isLoading || waitForMintTx?.isLoading}
                                                         onClick={onClickMint}
                                                         className="block w-full rounded-md bg-indigo-500 py-3 px-4 font-medium text-white shadow hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900"
                                                     >
@@ -337,9 +438,6 @@ export default function Example() {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="mx-auto max-w-7xl lg:px-8">
-                <DebugInfo />
             </div>
         </>
     )
