@@ -293,7 +293,7 @@ export default function Example() {
 
 
     function getTip(): Tip {
-        console.log('getTip');
+        // console.log('getTip');
 
         if (waitForMintTx?.isSuccess) {
             return {
@@ -465,6 +465,7 @@ export default function Example() {
                                     className="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
                                     src={tokenMeta.imageSrc}
                                     alt={tokenMeta.imageAlt}
+                                    priority={true}
                                 />
                             </div>
                         </div>
