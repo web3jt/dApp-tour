@@ -13,8 +13,6 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid'
 
 import CONTRACT_ABI from '../../config/abi/monarchMixer';
 
-import FCTxStatus from "../../components/Tx/status";
-
 const MONARCH_MIXER_CONTRACT_CONFIG = {
     address: '0x60B2D8fF61EA7adbee55BfC574F68AFFBaA9441b',
     abi: CONTRACT_ABI,
@@ -82,9 +80,6 @@ export default function Example() {
         enabled: Boolean(debouncedMintCodeJSON) && !mintCodeError,
     });
     const writeMint = useContractWrite(prepareMint?.data);
-
-
-    const [txSuccess, setTxSuccess] = useState<boolean>();
     const waitForMintTx = useWaitForTransaction({
         hash: writeMint?.data?.hash,
         confirmations: 1,
@@ -97,42 +92,6 @@ export default function Example() {
             console.warn('Error', error)
         },
     });
-
-
-    // const txTip = () => {
-    //     if (txSuccess !== undefined) {
-
-    //     }
-    // }
-
-    // const
-
-    // const [indicator, setIndicator] = useState<string>('');
-    // const [statusClassName, setStatusClassName] = useState<string>('');
-
-    // write, tx pending
-    // write, tx success
-    // write, tx error
-    // prepare, success
-    // prepare, error
-    // mintCode, empty
-
-
-
-
-    // TODO: onSuccess, set status
-    enum TxStatus {
-        Idle,
-        Error,
-        Loading,
-        Success,
-    }
-    const [txStatus, setTxStatus] = useState<TxStatus>(TxStatus.Idle);
-
-    // useEffect(() => {
-    //     console.log('waitForMintTx');
-    //     console.log(waitForMintTx);
-    // }, [waitForMintTx])
 
     // onClick `mint`
     const onClickMint = async () => {
@@ -167,74 +126,131 @@ export default function Example() {
     }, [mintCode, mintCodeError, prepareMint]);
 
 
-    const DEFAULT_MINT_TEXT = 'Enter Mint-Code to Claim XXX';
-    const [mintButtonText, setMintButtonText] = useState<string>(DEFAULT_MINT_TEXT);
+    // interface TokenMeta {
+    //     imageSrc: string,
+    //     imageAlt: string,
+    // }
 
-    const btnText = () => {
-        if (mintCodeJSON) {
-            if (prepareMint?.isFetching) {
-                return `Querying...`;
-            }
+    // const [tokenMeta, setTokenMeta] = useState<TokenMeta>({
+    //     imageSrc: 'https://tailwindui.com/img/ecommerce-images/confirmation-page-04-product-01.jpg',
+    //     imageAlt: 'Off-white t-shirt with circular dot illustration on the front of mountain ridges that fade.',
+    // });
 
-            if (mintCodeErrorMessage) {
-                return `Can NOT claim TokenID#${mintCodeJSON.tokenId}`;
-            }
-
-            return `Claim TokenID#${mintCodeJSON.tokenId}`;
-        }
-
-        return DEFAULT_MINT_TEXT;
+    enum TipType {
+        Info,
+        Error,
+        Success,
     }
 
-
-    useEffect(() => {
-        if (waitForMintTx) {
-            if (waitForMintTx.isLoading || waitForMintTx.isFetching) {
-                setMintButtonText(`Claiming...`);
-                return;
-            }
-
-            if (waitForMintTx.isSuccess) {
-                setMintButtonText(`Claim Successfully`);
-                return;
-            }
-
-            if (waitForMintTx.isError) {
-                setMintButtonText(`Claim Failed`);
-                return;
-            }
-        }
-
-        if (mintCodeJSON) {
-            if (prepareMint?.isFetching) {
-                setMintButtonText(`Querying...`);
-                return;
-            }
-
-            if (mintCodeErrorMessage) {
-                setMintButtonText(`Can NOT claim TokenID#${mintCodeJSON.tokenId}`);
-                return;
-            }
-
-            setMintButtonText(`Claim TokenID#${mintCodeJSON.tokenId}`);
-            return;
-        }
-
-        setMintButtonText(DEFAULT_MINT_TEXT);
-    }, [mintCodeJSON, mintCodeErrorMessage, prepareMint, waitForMintTx]);
-
-
-
-
-    interface TokenMeta {
-        imageSrc: string,
-        imageAlt: string,
+    type Tip = {
+        type: TipType,
+        message: string,
     }
 
-    const [tokenMeta, setTokenMeta] = useState<TokenMeta>({
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/confirmation-page-04-product-01.jpg',
-        imageAlt: 'Off-white t-shirt with circular dot illustration on the front of mountain ridges that fade.',
-    });
+    const DEFAULT_TIP = {
+        type: TipType.Info,
+        message: 'Enter a valid Mint-Code then claim Monarch-Mixer...'
+    } as Tip;
+
+
+    // const [tip, setTip] = useState<Tip>(DEFAULT_TIP);
+    // useEffect(() => {
+    //     if (waitForMintTx?.isSuccess) {
+    //         setTip({
+    //             type: TipType.Success,
+    //             message: 'Claim Successfully',
+    //         });
+    //         return;
+    //     }
+
+    //     if (waitForMintTx?.isLoading) {
+    //         setTip({
+    //             type: TipType.Info,
+    //             message: 'Pending...',
+    //         });
+    //         return;
+    //     }
+
+    //     if (writeMint?.isLoading) {
+    //         setTip({
+    //             type: TipType.Info,
+    //             message: 'Wait for authorization...',
+    //         });
+    //         return;
+    //     }
+
+    //     if (waitForMintTx?.error) {
+    //         setTip({
+    //             type: TipType.Error,
+    //             message: (waitForMintTx.error.hasOwnProperty('reason')) ?
+    //                 waitForMintTx.error['reason'] : waitForMintTx.error.message,
+    //         });
+    //         return;
+    //     }
+
+    //     if (writeMint?.error) {
+    //         setTip({
+    //             type: TipType.Error,
+    //             message: (writeMint.error.hasOwnProperty('reason')) ?
+    //                 writeMint.error['reason'] : writeMint.error.message,
+    //         });
+    //         return;
+    //     }
+
+    //     if (prepareMint?.isLoading) {
+    //         setTip({
+    //             type: TipType.Info,
+    //             message: 'Querying...',
+    //         });
+    //         return;
+    //     }
+
+    //     if (prepareMint?.error) {
+    //         setTip({
+    //             type: TipType.Error,
+    //             message: (prepareMint.error.hasOwnProperty('reason')) ?
+    //                 prepareMint.error['reason'] : prepareMint.error.message,
+    //         });
+    //         return;
+    //     }
+
+    //     if (mintCodeError) {
+    //         setTip({
+    //             type: TipType.Error,
+    //             message: mintCodeError
+    //         });
+    //         return;
+    //     }
+
+    //     if (!mintCode) {
+    //         setTip({
+    //             type: TipType.Info,
+    //             message: 'Please enter Mint-Code then claim your Monarch-Mixer...',
+    //         });
+    //         return;
+    //     }
+
+    //     if (mintCodeJSON) {
+    //         setTip({
+    //             type: TipType.Info,
+    //             message: `You can claim MonarchMixer: TokenID#${mintCodeJSON.tokenId}`,
+    //         });
+    //         return;
+    //     }
+
+    //     setTip({
+    //         type: TipType.Info,
+    //         message: 'Enter a valid Mint-Code then claim Monarch-Mixer...',
+    //     });
+
+    // }, [
+    //     mintCode,
+    //     mintCodeJSON,
+    //     mintCodeError,
+    //     prepareMint,
+    //     writeMint,
+    //     waitForMintTx,
+    // ]);
 
 
 
@@ -242,174 +258,110 @@ export default function Example() {
 
 
 
-    const DebugInfo = () => {
-        return (
-            <div className="mt-4">
+    function getTip(): Tip {
+        console.log('getTip');
 
-                {/* <p className="text-indigo-300">
-                    --- PREPARE ---
-                </p>
-                <p>
-                    {prepareMint && (
-                        JSON.stringify(prepareMint)
-                    )}
-                </p> */}
-
-                <p className="text-indigo-300">
-                    --- WRITE ---
-                </p>
-                {writeMint && (
-                    <p>
-                        {JSON.stringify(writeMint)}
-                    </p>
-                )}
-
-                <p className="text-indigo-300">
-                    --- WAIT ---
-                </p>
-
-                <FCTxStatus waitForTx={waitForMintTx} />
-            </div>
-        );
-    }
-
-
-    const Status = () => {
         if (waitForMintTx?.isSuccess) {
-            return (
-                <p className="mt-3 text-sm text-green-300 sm:mt-4">
-                    Claim Successfully!
-                </p>
-            );
+            return {
+                type: TipType.Success,
+                message: 'Claim Successfully',
+            };
         }
 
         if (waitForMintTx?.isLoading) {
-            return (
-                <p className="mt-3 text-sm text-gray-300 sm:mt-4">
-                    Pending...
-                </p>
-            );
+            return {
+                type: TipType.Info,
+                message: 'Pending...',
+            };
         }
 
         if (writeMint?.isLoading) {
-            return (
-                <p className="mt-3 text-sm text-green-300 sm:mt-4">
-                    Wait for authorization...
-                </p>
-            );
+            return {
+                type: TipType.Info,
+                message: 'Wait for authorization...',
+            };
         }
 
         if (waitForMintTx?.error) {
-            if (waitForMintTx.error.hasOwnProperty('reason')) {
-                return (
-                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
-                        {waitForMintTx.error['reason']}
-                    </p>
-                );
-            } else {
-                return (
-                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
-                        {waitForMintTx.error.message}
-                    </p>
-                );
-            }
+            return {
+                type: TipType.Error,
+                message: (waitForMintTx.error.hasOwnProperty('reason')) ?
+                    waitForMintTx.error['reason'] : waitForMintTx.error.message,
+            };
         }
 
         if (writeMint?.error) {
-            if (writeMint.error.hasOwnProperty('reason')) {
-                return (
-                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
-                        {writeMint.error['reason']}
-                    </p>
-                );
-            } else {
-                return (
-                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
-                        {writeMint.error.message}
-                    </p>
-                );
-            }
+            return {
+                type: TipType.Error,
+                message: (writeMint.error.hasOwnProperty('reason')) ?
+                    writeMint.error['reason'] : writeMint.error.message,
+            };
         }
 
         if (prepareMint?.isLoading) {
-            return (
-                <p className="mt-3 text-sm text-gray-300 sm:mt-4">
-                    Querying...
-                </p>
-            );
+            return {
+                type: TipType.Info,
+                message: 'Querying...',
+            };
         }
 
         if (prepareMint?.error) {
-            if (prepareMint.error.hasOwnProperty('reason')) {
-                return (
-                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
-                        {prepareMint.error['reason']}
-                    </p>
-                );
-            } else {
-                return (
-                    <p className="mt-3 text-sm text-rose-300 sm:mt-4">
-                        {prepareMint.error.message}
-                    </p>
-                );
-            }
+            return {
+                type: TipType.Error,
+                message: (prepareMint.error.hasOwnProperty('reason')) ?
+                    prepareMint.error['reason'] : prepareMint.error.message,
+            };
         }
 
         if (mintCodeError) {
-            return (
-                <p className="mt-3 text-sm text-rose-300 sm:mt-4">
-                    {mintCodeError}
-                </p>
-            );
+            return {
+                type: TipType.Error,
+                message: mintCodeError
+            };
         }
 
         if (!mintCode) {
-            return (
-                <p className="mt-3 text-sm text-gray-300 sm:mt-4">
-                    Please enter Mint-Code then claim your Monarch-Mixer...
-                </p>
-            );
+            return {
+                type: TipType.Info,
+                message: 'Please enter Mint-Code then claim your Monarch-Mixer...',
+            };
         }
 
         if (mintCodeJSON) {
-            return (
-                <p className="mt-3 text-sm text-gray-300 sm:mt-4">
-                    You can claim MonarchMixer: TokenID#{mintCodeJSON.tokenId}
-                </p>
-            );
+            return {
+                type: TipType.Info,
+                message: `You can claim MonarchMixer: TokenID#${mintCodeJSON.tokenId}`,
+            };
         }
 
-
-
-
-
-
-
-
-
-        // return (
-        //     <>
-        //         {!mintCode && (
-        //             <p className="mt-3 text-sm text-gray-300 sm:mt-4">
-        //                 Please enter Mint-Code then claim your Monarch-Mixer...
-        //             </p>
-        //         )}
-        //         {!mintCodeErrorMessage && (
-        //             <p className="mt-3 text-sm text-rose-300 sm:mt-4">
-        //                 Error Message...
-        //             </p>
-        //         )}
-        //         <p className="mt-3 text-sm text-rose-300 sm:mt-4">
-        //             {mintCodeErrorMessage}
-        //         </p>
-
-        //         <p className="mt-3 text-sm text-green-300 sm:mt-4">
-        //             Claimed Successfully...
-        //         </p>
-        //     </>
-        // );
+        return DEFAULT_TIP;
     }
 
+    const Tip = () => {
+        const tip = getTip();
+
+        if (tip.type === TipType.Error) {
+            return (
+                <p className="mt-3 text-sm text-rose-300 sm:mt-4">
+                    {tip.message}
+                </p>
+            )
+        }
+
+        if (tip.type === TipType.Success) {
+            return (
+                <p className="mt-3 text-sm text-green-300 sm:mt-4">
+                    {tip.message}
+                </p>
+            )
+        }
+
+        return (
+            <p className="mt-3 text-sm text-gray-300 sm:mt-4">
+                {tip.message}
+            </p>
+        )
+    }
 
 
     return (
@@ -469,7 +421,7 @@ export default function Example() {
                                                     </button>
                                                 </div>
                                             </div>
-                                            <Status />
+                                            <Tip />
                                         </div>
                                     </div>
                                 </div>
@@ -486,12 +438,6 @@ export default function Example() {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="mx-auto max-w-7xl lg:px-8">
-                <DebugInfo />
-                {/* <p>
-                    {JSON.stringify(prepareMint)}
-                </p> */}
             </div>
         </>
     )
