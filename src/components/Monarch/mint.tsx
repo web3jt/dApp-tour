@@ -13,9 +13,9 @@ import {
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import CONTRACT_ABI from '../../config/abi/monarchMixer';
 
-import TokenImage0 from '../../../public/images/tokens/0.svg';
-import TokenImage1 from '../../../public/images/tokens/1.svg';
-import TokenImage2 from '../../../public/images/tokens/2.svg';
+import TokenImage0 from '../../images/tokens/0.svg';
+import TokenImage1 from '../../images/tokens/1.svg';
+import TokenImage2 from '../../images/tokens/2.svg';
 
 type TokenMeta = {
     imageSrc: any,

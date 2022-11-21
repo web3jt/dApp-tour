@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "APP_ENV=development PORT=8080 next dev",
-        "build": "next build",
+        "build": "next build && next export",
         "start": "next start",
         "lint": "next lint",
         "typechain": "typechain --out-dir src/config/abi/types --target=ethers-v5 \"src/config/abi/*.json\""
