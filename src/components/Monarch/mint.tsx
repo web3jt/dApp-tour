@@ -38,7 +38,7 @@ const TOKEN_METAS = [
 ]
 
 const MONARCH_MIXER_CONTRACT_CONFIG = {
-    address: '0x60B2D8fF61EA7adbee55BfC574F68AFFBaA9441b',
+    address: '0xdd6E2713CBb317e36B7ebc8110A37B94096B86a9',
     abi: CONTRACT_ABI,
 };
 
