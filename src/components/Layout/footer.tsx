@@ -80,7 +80,9 @@ const Footer = () => {
                     ))}
                 </div>
                 <div className="mt-8 md:order-1 md:mt-0">
-                    <p className="text-center text-base text-gray-400">&copy; 2021 Your Company, Inc. All rights reserved.</p>
+                    <p className="text-center text-base text-gray-400">
+                        &copy; 2020-2021 Monarch Group. All rights reserved.
+                    </p>
                 </div>
             </div>
         </footer>

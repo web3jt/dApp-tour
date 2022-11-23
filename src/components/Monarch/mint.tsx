@@ -311,11 +311,6 @@ export default function Example() {
     // ]);
 
 
-
-
-
-
-
     function getTip(): Tip {
         // console.log('getTip');
 
@@ -329,21 +324,21 @@ export default function Example() {
         if (waitForMintTx?.isSuccess) {
             return {
                 type: TipType.Success,
-                message: 'Claim Successfully.',
+                message: 'Claimed Successfully.',
             };
         }
 
         if (waitForMintTx?.isLoading) {
             return {
                 type: TipType.Info,
-                message: 'Pending...',
+                message: 'Claim transaction is pending...',
             };
         }
 
         if (writeMint?.isLoading) {
             return {
                 type: TipType.Info,
-                message: 'Wait for authorization...',
+                message: 'Waiting for authorization...',
             };
         }
 
