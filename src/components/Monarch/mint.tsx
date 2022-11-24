@@ -169,21 +169,6 @@ export default function Example() {
 
 
 
-    enum TipType {
-        Info,
-        Error,
-        Success,
-    }
-
-    type Tip = {
-        type: TipType,
-        message: string,
-    }
-
-    const DEFAULT_TIP = {
-        type: TipType.Info,
-        message: 'Enter a valid Mint-Code then claim Monarch-Mixer...'
-    } as Tip;
 
     const Button = () => {
         if (!isConnected) {
@@ -310,6 +295,21 @@ export default function Example() {
     //     waitForMintTx,
     // ]);
 
+    enum TipType {
+        Info,
+        Error,
+        Success,
+    }
+
+    type Tip = {
+        type: TipType,
+        message: string,
+    }
+
+    const DEFAULT_TIP = {
+        type: TipType.Info,
+        message: 'Enter a valid Mint-Code then claim Monarch-Mixer...'
+    } as Tip;
 
     function getTip(): Tip {
         // console.log('getTip');
