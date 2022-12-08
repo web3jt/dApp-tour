@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import React from 'react';
 import Head from "next/head";
-import What from "../components/Monarch/what1";
-import Mixer from "../components/Monarch/mixer";
+import Def from "../components/Monarch/Def";
+import Mixer from "../components/Monarch/Mixer";
 import JoinDiscord from "../components/Monarch/JoinDiscord";
 import Team from "../components/Monarch/Team";
 import Container, { OuterContainer, InnerContainer } from "../components/Layout/Container";
@@ -22,7 +22,7 @@ const Page: NextPage = () => {
                     </div>
                 </div>
 
-                <What />
+                <Def />
                 <Mixer />
                 <Team />
                 <JoinDiscord />

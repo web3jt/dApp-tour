@@ -1,7 +1,11 @@
+import Image from 'next/image';
+import teamSampleImage from '../../images/team/sample.avif';
+
 const people = [
     {
         name: 'Barney',
         role: 'Community Manager and President',
+        image: teamSampleImage,
         imageUrl:
             'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
         bio: 'Ultricies massa malesuada viverra cras lobortis.',
@@ -11,6 +15,7 @@ const people = [
     {
         name: 'Steven',
         role: 'Operating Manager',
+        image: teamSampleImage,
         imageUrl:
             'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
@@ -20,6 +25,7 @@ const people = [
     {
         name: 'Smoke',
         role: 'Artist Relation, Lifestyle Consultant at We The Best Music',
+        image: teamSampleImage,
         imageUrl:
             'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
@@ -29,6 +35,7 @@ const people = [
     {
         name: 'Cuff',
         role: 'Athlete Relation, Host of SomeDude Show (executively produced by Lebron James)',
+        image: teamSampleImage,
         imageUrl:
             'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
@@ -38,6 +45,7 @@ const people = [
     {
         name: 'Cayla',
         role: 'Secretary and Administration',
+        image: teamSampleImage,
         imageUrl:
             'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
@@ -47,6 +55,7 @@ const people = [
     {
         name: 'Todd Kramer',
         role: 'Artist Relation, ROSS + Kramer Gallery Owner, founder of GODA',
+        image: teamSampleImage,
         imageUrl:
             'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
@@ -56,6 +65,7 @@ const people = [
     {
         name: 'Shahin',
         role: 'NFT/Web3 Advisor',
+        image: teamSampleImage,
         imageUrl:
             'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
@@ -65,6 +75,7 @@ const people = [
     {
         name: 'Christina',
         role: 'Growth and Global Relation',
+        image: teamSampleImage,
         imageUrl:
             'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
@@ -74,6 +85,7 @@ const people = [
     {
         name: 'Jun Li',
         role: 'Economics Advisor, Professor of Mathematics Department at Stanford',
+        image: teamSampleImage,
         imageUrl:
             'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
@@ -102,7 +114,9 @@ export default function Example() {
                             <li key={person.name} className="sm:py-8">
                                 <div className="space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
                                     <div className="aspect-w-3 aspect-h-2 sm:aspect-w-3 sm:aspect-h-4">
-                                        <img className="rounded-lg object-cover shadow-lg" src={person.imageUrl} alt="" />
+                                        <Image className="rounded-lg object-cover shadow-lg" src={person.image} alt="" />
+
+                                        {/* <img className="rounded-lg object-cover shadow-lg" src={person.imageUrl} alt="" /> */}
                                     </div>
                                     <div className="sm:col-span-2">
                                         <div className="space-y-4">

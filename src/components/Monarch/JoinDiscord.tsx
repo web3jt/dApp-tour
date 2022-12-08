@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import discordImage from '../../images/discord.avif';
 
 function Example() {
     return (
@@ -9,10 +11,11 @@ function Example() {
                     <div className="absolute inset-x-0 h-1/2 lg:hidden" aria-hidden="true" />
                     <div className="mx-auto lg:max-w-none lg:p-0">
                         <div className="aspect-w-10 aspect-h-6 sm:aspect-w-2 sm:aspect-h-1 lg:aspect-w-1">
-                            <img
+                            <Image
                                 className="rounded-3xl object-cover object-center shadow-2xl"
-                                src="https://images.unsplash.com/photo-1507207611509-ec012433ff52?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=934&q=80"
-                                alt=""
+                                src={discordImage}
+                                alt="Discord"
+                                priority={true}
                             />
                         </div>
                     </div>

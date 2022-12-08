@@ -1,17 +1,22 @@
 import Link from 'next/link';
 import { TwitterIcon, InstagramIcon, GitHubIcon, LinkedInIcon } from '../Icons/SocialIcons';
 import social from '../../config/constants/social';
-import Container, { OuterContainer, InnerContainer } from "../Layout/Container";
 
-function SocialLink({ icon: Icon, ...props }) {
-    return (
-        <Link className="group -m-1 p-1" {...props}>
-            <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
-        </Link>
-    )
+
+interface SocialLinkProps {
+    className?: string;
+    href: string;
+    ariaLabel: string;
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
 
-
+const SocialLink: React.FC<SocialLinkProps> = ({ className, href, ariaLabel, icon: Icon }) => {
+    return (
+        <Link className="group -m-1 p-1" href={href} aria-label={ariaLabel}>
+            <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+        </Link>
+    );
+}
 
 
 function Example() {
@@ -42,22 +47,22 @@ function Example() {
                 <div className="mt-6 flex gap-6">
                     <SocialLink
                         href={social.twitter}
-                        aria-label="Follow on Twitter"
+                        ariaLabel="Follow on Twitter"
                         icon={TwitterIcon}
                     />
                     <SocialLink
                         href={social.instagram}
-                        aria-label="Follow on Instagram"
+                        ariaLabel="Follow on Instagram"
                         icon={InstagramIcon}
                     />
                     <SocialLink
                         href={social.github}
-                        aria-label="Follow on GitHub"
+                        ariaLabel="Follow on GitHub"
                         icon={GitHubIcon}
                     />
                     <SocialLink
                         href={social.linkedin}
-                        aria-label="Follow on LinkedIn"
+                        ariaLabel="Follow on LinkedIn"
                         icon={LinkedInIcon}
                     />
                 </div>

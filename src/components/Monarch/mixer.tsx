@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
+import social from '../../config/constants/social';
 
 function Example() {
     return (
@@ -35,8 +36,9 @@ function Example() {
                     <div className="lg:grid lg:grid-cols-12 lg:gap-8">
                         <div className="sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:flex lg:items-center lg:text-left">
                             <div>
-                                <a
-                                    href="#"
+                                <Link
+                                    target="_blank"
+                                    href={social.openSea}
                                     className="inline-flex items-center rounded-full bg-black p-1 pr-2 text-white hover:text-zinc-200 sm:text-base lg:text-sm xl:text-base"
                                 >
                                     <span className="rounded-full bg-indigo-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">
@@ -46,7 +48,7 @@ function Example() {
                                         on OpenSEA
                                     </span>
                                     <ChevronRightIcon className="ml-2 h-5 w-5 text-zinc-500" aria-hidden="true" />
-                                </a>
+                                </Link>
                                 <h1 className="mt-4 text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
                                     Monarch Mixer
                                 </h1>
@@ -78,8 +80,8 @@ function Example() {
                         </div>
                     </div>
                 </main>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

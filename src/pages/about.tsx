@@ -48,10 +48,10 @@ const Page: NextPage = () => {
     return (
         <>
             <Head>
-                <title>About - Spencer Sharp</title>
+                <title>About | Monarch</title>
                 <meta
                     name="description"
-                    content="I’m Spencer Sharp. I live in New York City, where I design the future."
+                    content="About | Monarch"
                 />
             </Head>
             <Container className="py-16 sm:py-32">
