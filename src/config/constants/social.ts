@@ -5,7 +5,7 @@ const social = {
     facebook: 'https://www.facebook.com/your_facebook',
     instagram: 'https://www.instagram.com/your_instagram',
     linkedin: 'https://www.linkedin.com/in/your_linkedin',
-    github: 'https://github.com/web3jt',
+    github: 'https://github.com/web3monarch',
     youtube: '',
     medium: '',
     twitch: '',

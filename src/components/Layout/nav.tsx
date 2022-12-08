@@ -9,7 +9,7 @@ import { XMarkIcon, ChevronDownIcon, SunIcon, MoonIcon, WalletIcon } from '@hero
 import Container, { OuterContainer, InnerContainer } from "./Container";
 import Connect from './Connect';
 
-import { MonarchLogo } from '../Icons/Logo';
+import { Logo } from '../Monarch/Logo';
 
 
 type LinkProps = {
@@ -139,17 +139,17 @@ const MobileNavigation = ({ className, style }: StyleProps) => {
 
 
 
-function AvatarContainer({ children, className, style, ...props }: NodeProps) {
+function AvatarContainer() {
     return (
-        <div
-            className={clsx(
-                className,
-                'h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10'
-            )}
-            {...props}
-        >
-            {children}
-        </div>
+        <Logo className={clsx(
+            'pointer-events-auto',
+            'transition ease-in-out duration-500 backdrop-blur',
+            'h-auto w-10', // rounded-full p-0.5
+            'shadow-lg shadow-zinc-800/5',
+            // 'bg-zinc-800/90 hover:bg-zinc-400/30',
+            // 'ring-1 ring-white/10',
+            'text-zinc-400 hover:text-white',
+        )} />
     );
 }
 
@@ -161,9 +161,7 @@ export const Nav = () => {
                 <Container className="top-[var(--header-top,theme(spacing.6))] w-full">
                     <div className="relative flex gap-4">
                         <div className="flex flex-1">
-                            <AvatarContainer>
-                                <MonarchLogo className="text-white" />
-                            </AvatarContainer>
+                            <AvatarContainer />
                         </div>
                         <div className="flex flex-1 justify-end md:justify-center">
                             <MobileNavigation className="pointer-events-auto md:hidden" />
@@ -175,10 +173,7 @@ export const Nav = () => {
                     </div>
                 </Container>
 
-
-
             </nav>
         </div>
-
     )
 }

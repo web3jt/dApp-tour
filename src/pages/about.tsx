@@ -18,6 +18,7 @@ import {
 
 
 import portraitImage from '../images/portrait.jpg';
+import social from '../config/constants/social';
 
 interface SocialLinkProps {
     className?: string;
@@ -90,24 +91,24 @@ const Page: NextPage = () => {
                     </div>
                     <div className="lg:pl-20">
                         <ul role="list">
-                            <SocialLink href="https://twitter.com/monarch_io" icon={TwitterIcon}>
+                            <SocialLink href={social.twitter} icon={TwitterIcon}>
                                 Follow on Twitter
                             </SocialLink>
-                            <SocialLink href="#" icon={InstagramIcon} className="mt-4">
+                            <SocialLink href={social.instagram} icon={InstagramIcon} className="mt-4">
                                 Follow on Instagram
                             </SocialLink>
-                            <SocialLink href="https://github.com/web3jt" icon={GitHubIcon} className="mt-4">
+                            <SocialLink href={social.github} icon={GitHubIcon} className="mt-4">
                                 Follow on GitHub
                             </SocialLink>
-                            <SocialLink href="#" icon={LinkedInIcon} className="mt-4">
+                            <SocialLink href={social.linkedin} icon={LinkedInIcon} className="mt-4">
                                 Follow on LinkedIn
                             </SocialLink>
                             <SocialLink
-                                href="mailto:support@monarch.one"
+                                href={`mailto:${social.email}`}
                                 icon={MailIcon}
                                 className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
                             >
-                                support@monarch.one
+                                {social.email}
                             </SocialLink>
                         </ul>
                     </div>
