@@ -1,9 +1,7 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
-
-import Header from './header';
-import Nav from './nav';
-import Footer from './footer';
+import { Nav } from './Nav';
+import { Footer } from './Footer';
 
 type Props = {
     children: ReactNode;
@@ -18,10 +16,20 @@ const Layout = ({ children }: Props) => (
             <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
             <link rel="manifest" href="/site.webmanifest" />
         </Head>
-        <Header />
-        {/* <Nav /> */}
-        {children}
-        <Footer />
+        <div className="fixed inset-0 flex justify-center sm:px-8">
+            <div className="flex w-full max-w-7xl lg:px-8">
+                <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20">
+                </div>
+            </div>
+        </div>
+
+        <div className="relative">
+            <Nav />
+            {children}
+            <Footer />
+        </div>
+
+
     </div>
 );
 

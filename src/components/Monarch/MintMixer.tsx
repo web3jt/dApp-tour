@@ -1,7 +1,12 @@
+import Link from 'next/link';
+import { Fragment } from 'react';
+import { Popover, Transition } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ChevronRightIcon } from '@heroicons/react/20/solid';
+
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'usehooks-ts';
 import Image from 'next/image';
-import Link from 'next/link';
 import { ethers } from 'ethers';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 import {
@@ -10,12 +15,13 @@ import {
     useContractWrite,
     useWaitForTransaction,
 } from "wagmi";
-import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import CONTRACT_ABI from '../../config/abi/monarchMixer';
 
 import TokenImage0 from '../../images/tokens/0.svg';
 import TokenImage1 from '../../images/tokens/1.svg';
 import TokenImage2 from '../../images/tokens/2.svg';
+
+
 
 type TokenMeta = {
     imageSrc: any,
@@ -55,7 +61,28 @@ function isMintCodeJSON(obj: any): obj is MintCodeJSON {
     return true;
 }
 
-export default function Example() {
+
+enum TipType {
+    Info,
+    Error,
+    Success,
+}
+
+type Tip = {
+    type: TipType,
+    message: string,
+}
+
+const DEFAULT_TIP = {
+    type: TipType.Info,
+    message: 'Enter a valid Mint-Code then claim Monarch-Mixer...'
+} as Tip;
+
+
+function Example() {
+
+
+
     const { address, isConnected } = useAccount();
     const { openConnectModal } = useConnectModal();
 
@@ -196,120 +223,7 @@ export default function Example() {
     }
 
 
-    // const [tip, setTip] = useState<Tip>(DEFAULT_TIP);
-    // useEffect(() => {
-    //     if (waitForMintTx?.isSuccess) {
-    //         setTip({
-    //             type: TipType.Success,
-    //             message: 'Claim Successfully',
-    //         });
-    //         return;
-    //     }
 
-    //     if (waitForMintTx?.isLoading) {
-    //         setTip({
-    //             type: TipType.Info,
-    //             message: 'Pending...',
-    //         });
-    //         return;
-    //     }
-
-    //     if (writeMint?.isLoading) {
-    //         setTip({
-    //             type: TipType.Info,
-    //             message: 'Wait for authorization...',
-    //         });
-    //         return;
-    //     }
-
-    //     if (waitForMintTx?.error) {
-    //         setTip({
-    //             type: TipType.Error,
-    //             message: (waitForMintTx.error.hasOwnProperty('reason')) ?
-    //                 waitForMintTx.error['reason'] : waitForMintTx.error.message,
-    //         });
-    //         return;
-    //     }
-
-    //     if (writeMint?.error) {
-    //         setTip({
-    //             type: TipType.Error,
-    //             message: (writeMint.error.hasOwnProperty('reason')) ?
-    //                 writeMint.error['reason'] : writeMint.error.message,
-    //         });
-    //         return;
-    //     }
-
-    //     if (prepareMint?.isLoading) {
-    //         setTip({
-    //             type: TipType.Info,
-    //             message: 'Querying...',
-    //         });
-    //         return;
-    //     }
-
-    //     if (prepareMint?.error) {
-    //         setTip({
-    //             type: TipType.Error,
-    //             message: (prepareMint.error.hasOwnProperty('reason')) ?
-    //                 prepareMint.error['reason'] : prepareMint.error.message,
-    //         });
-    //         return;
-    //     }
-
-    //     if (mintCodeError) {
-    //         setTip({
-    //             type: TipType.Error,
-    //             message: mintCodeError
-    //         });
-    //         return;
-    //     }
-
-    //     if (!mintCode) {
-    //         setTip({
-    //             type: TipType.Info,
-    //             message: 'Please enter Mint-Code then claim your Monarch-Mixer...',
-    //         });
-    //         return;
-    //     }
-
-    //     if (mintCodeJSON) {
-    //         setTip({
-    //             type: TipType.Info,
-    //             message: `You can claim MonarchMixer: TokenID#${mintCodeJSON.tokenId}`,
-    //         });
-    //         return;
-    //     }
-
-    //     setTip({
-    //         type: TipType.Info,
-    //         message: 'Enter a valid Mint-Code then claim Monarch-Mixer...',
-    //     });
-
-    // }, [
-    //     mintCode,
-    //     mintCodeJSON,
-    //     mintCodeError,
-    //     prepareMint,
-    //     writeMint,
-    //     waitForMintTx,
-    // ]);
-
-    enum TipType {
-        Info,
-        Error,
-        Success,
-    }
-
-    type Tip = {
-        type: TipType,
-        message: string,
-    }
-
-    const DEFAULT_TIP = {
-        type: TipType.Info,
-        message: 'Enter a valid Mint-Code then claim Monarch-Mixer...'
-    } as Tip;
 
     function getTip(): Tip {
         // console.log('getTip');
@@ -424,11 +338,17 @@ export default function Example() {
     }
 
 
+
+
+
+
+
+
     return (
-        <div className="relative overflow-hidden">
+        <div id="mint-mixer" className="relative overflow-hidden">
             <div className="hidden sm:absolute sm:inset-0 sm:block" aria-hidden="true">
                 <svg
-                    className="absolute bottom-0 right-0 mb-48 translate-x-1/2 transform text-zinc-700 lg:top-0 lg:mt-28 lg:mb-0 xl:translate-x-0 xl:transform-none"
+                    className="absolute bottom-0 right-0 mb-48 translate-x-1/2 transform text-zinc-700/30 lg:top-0 lg:mt-28 lg:mb-0 xl:translate-x-0 xl:transform-none"
                     width={364}
                     height={384}
                     viewBox="0 0 364 384"
@@ -451,33 +371,41 @@ export default function Example() {
             </div>
             <div className="relative pt-6 py-12 lg:py-24">
                 <main className="mt-16 sm:mt-24">
-                    <div className="lg:grid lg:grid-cols-2 lg:gap-8">
-                        <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:flex lg:items-center lg:px-0 lg:text-left">
+                    <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+                        <div className="sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:flex lg:items-center lg:text-left">
                             <div>
                                 <a
                                     href="#"
-                                    className="inline-flex items-center rounded-full bg-black p-1 pr-2 text-white hover:text-gray-200 sm:text-base lg:text-sm xl:text-base"
+                                    className="inline-flex items-center rounded-full bg-black p-1 pr-2 text-white hover:text-zinc-200 sm:text-base lg:text-sm xl:text-base"
                                 >
                                     <span className="rounded-full bg-indigo-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">
-                                        Discord
+                                        Explore
                                     </span>
                                     <span className="ml-4 text-sm">
-                                        Welcome to Monarch Family
+                                        on OpenSEA
                                     </span>
-                                    <ChevronRightIcon className="ml-2 h-5 w-5 text-gray-500" aria-hidden="true" />
+                                    <ChevronRightIcon className="ml-2 h-5 w-5 text-zinc-500" aria-hidden="true" />
                                 </a>
                                 <h1 className="mt-4 text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
                                     <span className="block">
-                                        Claim Monarch-Mixer
+                                        Claim Monarch Mixer
                                     </span>
                                     <span className="block text-indigo-400">
                                         Join our Journey
                                     </span>
                                 </h1>
                                 <p className="mt-6 text-base text-zinc-400">
-                                    Monarch Mixer are NFT mementos, minted in recognition for our early supporters.
+                                    Monarch Mixer are NFT mementos,
+                                    minted in recognition for our early supporters.
+                                    The word “Mixer” describes our journey and mission –
+                                    bring different names to collaborate something
+                                    you wouldn’t expect and skyrocket the experience.
+                                    We will continuously facilitate activities and
+                                    bridging the right people in the right place to thrive.
+                                    There will be a limited amount of Monarch Mixers
+                                    given out during these activities. Stay tuned!
                                 </p>
-                                <div className="mt-10 sm:mt-12">
+                                <div className="mt-8">
                                     <div className="sm:px-1 sm:mx-auto sm:max-w-xl lg:mx-0">
                                         <div className="sm:flex">
                                             <div className="min-w-0 flex-1">
@@ -502,10 +430,11 @@ export default function Example() {
                                 </div>
                             </div>
                         </div>
-                        <div className="mt-12 -mb-16 sm:-mb-48 lg:relative lg:m-0">
-                            <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
+                        <div className="mt-16 sm:mt-24 lg:col-span-6 lg:mt-0">
+                            <div className="sm:mx-auto sm:w-full sm:max-w-md sm:overflow-hidden">
+                                {/* ... sm:rounded-lg */}
                                 <Image
-                                    className="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
+                                    className="h-full w-auto"
                                     src={tokenMeta.imageSrc}
                                     alt={tokenMeta.imageAlt}
                                     priority={true}
@@ -518,3 +447,5 @@ export default function Example() {
         </div>
     )
 }
+
+export default Example;

@@ -1,6 +1,6 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-
+import Container, { OuterContainer, InnerContainer } from "./Container";
 import Image from "next/image";
 
 export const CustomConnect = () => {
@@ -95,13 +95,15 @@ export const CustomConnect = () => {
 
 
                 return (
-                    <header className="relative z-10">
-                        <div className={unsupportedNetwork ? 'bg-rose-700' : 'bg-gray-900'}>
+                    <header>
+                        <OuterContainer>
+                            {/* <div className={unsupportedNetwork ? 'bg-rose-700' : 'bg-black'}> */}
                             <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
                                 <CurrentNetwork />
                                 <CurrentAccount />
                             </div>
-                        </div>
+                            {/* </div> */}
+                        </OuterContainer>
                     </header>
                 );
             }}
