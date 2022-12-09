@@ -37,8 +37,6 @@ export function LinkedInIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGEle
     )
 }
 
-
-
 export function MailIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" {...props}>

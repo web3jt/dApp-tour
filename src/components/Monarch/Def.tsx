@@ -1,19 +1,19 @@
 import Link from 'next/link';
 import { TwitterIcon, InstagramIcon, GitHubIcon, LinkedInIcon } from '../Icons/SocialIcons';
 import social from '../../config/constants/social';
+import clsx from 'clsx';
 
 
 interface SocialLinkProps {
-    className?: string;
     href: string;
     ariaLabel: string;
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
 
-const SocialLink: React.FC<SocialLinkProps> = ({ className, href, ariaLabel, icon: Icon }) => {
+const SocialLink: React.FC<SocialLinkProps> = ({ href, ariaLabel, icon: Icon }) => {
     return (
         <Link className="group -m-1 p-1" href={href} aria-label={ariaLabel}>
-            <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+            <Icon className="transition h-6 w-6 fill-zinc-500 group-hover:fill-zinc-300" />
         </Link>
     );
 }
@@ -22,7 +22,7 @@ const SocialLink: React.FC<SocialLinkProps> = ({ className, href, ariaLabel, ico
 function Example() {
     return (
         <div className="py-12 lg:py-24">
-            <div className="max-w-3xl mt-9">
+            <div className="max-w-3xl">
                 <h1 className="text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
                     What is Monarch?
                 </h1>
@@ -45,26 +45,33 @@ function Example() {
                     education and activities that will explore new pathways to digital world.
                 </div>
                 <div className="mt-6 flex gap-6">
-                    <SocialLink
-                        href={social.twitter}
-                        ariaLabel="Follow on Twitter"
-                        icon={TwitterIcon}
-                    />
-                    <SocialLink
-                        href={social.instagram}
-                        ariaLabel="Follow on Instagram"
-                        icon={InstagramIcon}
-                    />
-                    <SocialLink
-                        href={social.github}
-                        ariaLabel="Follow on GitHub"
-                        icon={GitHubIcon}
-                    />
-                    <SocialLink
-                        href={social.linkedin}
-                        ariaLabel="Follow on LinkedIn"
-                        icon={LinkedInIcon}
-                    />
+
+                    {[
+                        {
+                            href: social.twitter,
+                            ariaLabel: "Follow on Twitter",
+                            icon: TwitterIcon,
+                        },
+                        {
+                            href: social.instagram,
+                            ariaLabel: "Follow on Instagram",
+                            icon: InstagramIcon,
+
+                        },
+                        {
+                            href: social.github,
+                            ariaLabel: "Follow on GitHub",
+                            icon: GitHubIcon,
+                        },
+                        {
+                            href: social.linkedin,
+                            ariaLabel: "Follow on LinkedIn",
+                            icon: LinkedInIcon,
+                        },
+                    ].map((link, key) => (
+                        <SocialLink key={key} href={link.href} ariaLabel={link.ariaLabel} icon={link.icon} />
+                    ))}
+
                 </div>
             </div>
         </div>

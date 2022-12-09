@@ -6,9 +6,7 @@ import clsx from 'clsx';
 function Ani() {
     return (
         <div className="py-12 lg:py-24">
-
-
-            <div className="h-64 border-2 border-zinc-600/50 rounded-xl flex flex-col items-center justify-center text-zinc-600">
+            <div className="py-12 flex flex-col items-center justify-center text-zinc-600">
                 <Logo className={clsx(
                     'pointer-events-auto',
                     'transition ease-in-out duration-500 backdrop-blur',
@@ -20,7 +18,7 @@ function Ani() {
                 )} />
 
                 <div className="text-sm">
-                    An animated image here
+                    Another animated image here...
                 </div>
             </div>
         </div>
