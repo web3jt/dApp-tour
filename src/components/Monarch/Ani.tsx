@@ -12,9 +12,7 @@ function Ani() {
                     'transition ease-in-out duration-500 backdrop-blur',
                     'h-auto w-32', // rounded-full p-0.5
                     'shadow-lg shadow-zinc-800/5',
-                    // 'bg-zinc-800/90 hover:bg-zinc-400/30',
-                    // 'ring-1 ring-white/10',
-                    'text-zinc-400/50 hover:text-white',
+                    'text-zinc-400/50 hover:text-pri-400',
                 )} />
 
                 <div className="text-sm">

@@ -21,7 +21,7 @@ function Example() {
                     </div>
                 </div>
 
-                <div className="relative lg:bg-indigo-800 lg:col-span-10 lg:col-start-3 lg:row-start-1 lg:grid lg:grid-cols-10 lg:items-center lg:rounded-3xl">
+                <div className="relative lg:bg-sec-800 lg:col-span-10 lg:col-start-3 lg:row-start-1 lg:grid lg:grid-cols-10 lg:items-center lg:rounded-3xl">
                     <div className="absolute inset-0 hidden overflow-hidden rounded-3xl lg:block" aria-hidden="true">
                         <svg
                             className="absolute bottom-full left-full translate-y-1/3 -translate-x-2/3 transform xl:bottom-auto xl:top-0 xl:translate-y-0"
@@ -40,7 +40,7 @@ function Example() {
                                     height={20}
                                     patternUnits="userSpaceOnUse"
                                 >
-                                    <rect x={0} y={0} width={4} height={4} className="text-indigo-500/30" fill="currentColor" />
+                                    <rect x={0} y={0} width={4} height={4} className="text-sec-500/30" fill="currentColor" />
                                 </pattern>
                             </defs>
                             <rect width={404} height={384} fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)" />
@@ -62,7 +62,7 @@ function Example() {
                                     height={20}
                                     patternUnits="userSpaceOnUse"
                                 >
-                                    <rect x={0} y={0} width={4} height={4} className="text-indigo-500/30" fill="currentColor" />
+                                    <rect x={0} y={0} width={4} height={4} className="text-sec-500/30" fill="currentColor" />
                                 </pattern>
                             </defs>
                             <rect width={404} height={384} fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)" />
@@ -77,7 +77,7 @@ function Example() {
                             dui laoreet diam sed lacus, fames.
                         </p>
                         <Link
-                            className="block w-full rounded-md border border-transparent bg-white py-3 px-5 text-center text-base font-medium text-indigo-700 shadow-md hover:bg-zinc-50 sm:inline-block sm:w-auto"
+                            className="block w-full rounded-md border border-transparent bg-white py-3 px-5 text-center text-base font-medium text-sec-700 shadow-md hover:bg-zinc-50 sm:inline-block sm:w-auto"
                             href="#"
                         >
                             Seek for more infomation

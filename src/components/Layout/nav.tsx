@@ -144,11 +144,9 @@ function AvatarContainer() {
         <Logo className={clsx(
             'pointer-events-auto',
             'transition ease-in-out duration-500 backdrop-blur',
-            'h-auto w-10', // rounded-full p-0.5
+            'h-auto w-10',
             'shadow-lg shadow-zinc-800/5',
-            // 'bg-zinc-800/90 hover:bg-zinc-400/30',
-            // 'ring-1 ring-white/10',
-            'text-zinc-400 hover:text-white',
+            'text-zinc-400 hover:text-pri-400',
         )} />
     );
 }

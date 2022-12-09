@@ -208,7 +208,7 @@ const Example = () => {
                                                     key={category.name}
                                                     className={({ selected }) =>
                                                         classNames(
-                                                            selected ? 'text-indigo-600 border-indigo-600' : 'text-gray-900 border-transparent',
+                                                            selected ? 'text-pri-600 border-pri-600' : 'text-gray-900 border-transparent',
                                                             'flex-1 whitespace-nowrap border-b-2 py-4 px-1 text-base font-medium'
                                                         )
                                                     }

@@ -205,7 +205,7 @@ function Example() {
                 <button
                     type="button"
                     onClick={openConnectModal}
-                    className="block w-full rounded-md bg-indigo-500 py-3 px-4 font-medium text-base text-white shadow hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900"
+                    className="block w-full rounded-md bg-pri-500 py-3 px-4 font-medium text-base text-white shadow hover:bg-pri-600 focus:outline-none focus:ring-2 focus:ring-pri-300 focus:ring-offset-2 focus:ring-offset-gray-900"
                 >
                     Connect Wallet
                 </button>
@@ -217,7 +217,7 @@ function Example() {
                 type="button"
                 disabled={!writeMint.write || writeMint.isLoading || waitForMintTx?.isLoading}
                 onClick={onClickMint}
-                className="block w-full rounded-md bg-indigo-500 py-3 px-4 font-medium text-base text-white shadow hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900"
+                className="block w-full rounded-md bg-pri-500 py-3 px-4 font-medium text-base text-white shadow hover:bg-pri-600 focus:outline-none focus:ring-2 focus:ring-pri-300 focus:ring-offset-2 focus:ring-offset-gray-900"
             >
                 Claim Now
             </button>
@@ -381,7 +381,7 @@ function Example() {
                                     href={social.openSea}
                                     className="inline-flex items-center rounded-full bg-black p-1 pr-2 text-white hover:text-zinc-200 sm:text-base lg:text-sm xl:text-base"
                                 >
-                                    <span className="rounded-full bg-indigo-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">
+                                    <span className="rounded-full bg-pri-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">
                                         Explore
                                     </span>
                                     <span className="ml-4 text-sm">
@@ -393,7 +393,7 @@ function Example() {
                                     <span className="block">
                                         Claim Monarch Mixer
                                     </span>
-                                    <span className="block text-indigo-400">
+                                    <span className="block text-pri-400">
                                         Join our Journey
                                     </span>
                                 </h1>
@@ -420,7 +420,7 @@ function Example() {
                                                     type="mint-code"
                                                     onChange={(e) => setMintCode(e.currentTarget.value.trim())}
                                                     placeholder="Enter your Mint-Code"
-                                                    className="block w-full rounded-md border-0 px-4 py-3 disabled:bg-gray-300 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:placeholder-gray-400"
+                                                    className="block w-full rounded-md border-0 px-4 py-3 disabled:bg-gray-300 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pri-300 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:placeholder-gray-400"
                                                     disabled={!isConnected}
                                                 />
                                             </div>

@@ -17,7 +17,7 @@ const SocialLink: React.FC<SocialLinkProps> = ({ href, ariaLabel, icon: Icon }) 
         <Link className="group -m-1 p-1" href={href} aria-label={ariaLabel}>
             <Icon className={clsx(
                 'transition backdrop-blur',
-                'h-6 w-6 fill-zinc-600 group-hover:fill-zinc-400',
+                'h-6 w-6 fill-zinc-600 group-hover:fill-pri-400',
             )} />
         </Link>
     );
@@ -33,11 +33,9 @@ export function Footer() {
                             <Logo className={clsx(
                                 'pointer-events-auto',
                                 'transition ease-in-out duration-500 backdrop-blur',
-                                'mx-auto h-auto w-12 md:w-16', // rounded-full p-0.5
+                                'mx-auto h-auto w-12 md:w-16',
                                 'shadow-lg shadow-zinc-800/5',
-                                // 'bg-zinc-800/90 hover:bg-zinc-400/30',
-                                // 'ring-1 ring-white/10',
-                                'text-zinc-600 hover:text-white',
+                                'text-zinc-600 hover:text-pri-400',
                             )} />
                         </div>
 
@@ -72,7 +70,7 @@ export function Footer() {
                                         className={clsx(
                                             'transition rounded-lg py-1 px-3',
                                             'hover:bg-zinc-800',
-                                            'text-zinc-700 hover:text-teal-400',
+                                            'text-zinc-700 hover:text-pri-400',
                                         )}
                                     >
                                         {link.title}
