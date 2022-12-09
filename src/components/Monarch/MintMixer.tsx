@@ -205,7 +205,7 @@ function Example() {
                 <button
                     type="button"
                     onClick={openConnectModal}
-                    className="block w-full rounded-md bg-pri-500 py-3 px-4 font-medium text-base text-white shadow hover:bg-pri-600 focus:outline-none focus:ring-2 focus:ring-pri-300 focus:ring-offset-2 focus:ring-offset-gray-900"
+                    className="block w-full rounded-md bg-pri-500 py-3 px-4 font-medium text-base text-white shadow hover:bg-pri-600 focus:outline-none focus:ring-2 focus:ring-pri-300 focus:ring-offset-2 focus:ring-offset-pure-900"
                 >
                     Connect Wallet
                 </button>
@@ -217,7 +217,7 @@ function Example() {
                 type="button"
                 disabled={!writeMint.write || writeMint.isLoading || waitForMintTx?.isLoading}
                 onClick={onClickMint}
-                className="block w-full rounded-md bg-pri-500 py-3 px-4 font-medium text-base text-white shadow hover:bg-pri-600 focus:outline-none focus:ring-2 focus:ring-pri-300 focus:ring-offset-2 focus:ring-offset-gray-900"
+                className="block w-full rounded-md bg-pri-500 py-3 px-4 font-medium text-base text-white shadow hover:bg-pri-600 focus:outline-none focus:ring-2 focus:ring-pri-300 focus:ring-offset-2 focus:ring-offset-pure-900"
             >
                 Claim Now
             </button>
@@ -333,7 +333,7 @@ function Example() {
         }
 
         return (
-            <p className="mt-3 text-sm text-gray-300 sm:mt-4">
+            <p className="mt-3 text-sm text-pure-300 sm:mt-4">
                 {tip.message}
             </p>
         )
@@ -350,7 +350,7 @@ function Example() {
         <div id="mint-mixer" className="relative overflow-hidden">
             <div className="hidden sm:absolute sm:inset-0 sm:block" aria-hidden="true">
                 <svg
-                    className="absolute bottom-0 right-0 mb-48 translate-x-1/2 transform text-zinc-700/30 lg:top-0 lg:mt-28 lg:mb-0 xl:translate-x-0 xl:transform-none"
+                    className="absolute bottom-0 right-0 mb-48 translate-x-1/2 transform text-pure-700/30 lg:top-0 lg:mt-28 lg:mb-0 xl:translate-x-0 xl:transform-none"
                     width={364}
                     height={384}
                     viewBox="0 0 364 384"
@@ -379,7 +379,7 @@ function Example() {
                                 <Link
                                     target="_blank"
                                     href={social.openSea}
-                                    className="inline-flex items-center rounded-full bg-black p-1 pr-2 text-white hover:text-zinc-200 sm:text-base lg:text-sm xl:text-base"
+                                    className="inline-flex items-center rounded-full bg-black p-1 pr-2 text-white hover:text-pure-200 sm:text-base lg:text-sm xl:text-base"
                                 >
                                     <span className="rounded-full bg-pri-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">
                                         Explore
@@ -387,9 +387,9 @@ function Example() {
                                     <span className="ml-4 text-sm">
                                         on OpenSEA
                                     </span>
-                                    <ChevronRightIcon className="ml-2 h-5 w-5 text-zinc-500" aria-hidden="true" />
+                                    <ChevronRightIcon className="ml-2 h-5 w-5 text-pure-500" aria-hidden="true" />
                                 </Link>
-                                <h1 className="mt-4 text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
+                                <h1 className="mt-4 text-4xl font-bold tracking-tight text-pure-100 sm:text-5xl">
                                     <span className="block">
                                         Claim Monarch Mixer
                                     </span>
@@ -397,7 +397,7 @@ function Example() {
                                         Join our Journey
                                     </span>
                                 </h1>
-                                <p className="mt-6 text-base text-zinc-400">
+                                <p className="mt-6 text-base text-pure-400">
                                     Monarch Mixer are NFT mementos,
                                     minted in recognition for our early supporters.
                                     The word “Mixer” describes our journey and mission –
@@ -420,7 +420,7 @@ function Example() {
                                                     type="mint-code"
                                                     onChange={(e) => setMintCode(e.currentTarget.value.trim())}
                                                     placeholder="Enter your Mint-Code"
-                                                    className="block w-full rounded-md border-0 px-4 py-3 disabled:bg-gray-300 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pri-300 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:placeholder-gray-400"
+                                                    className="block w-full rounded-md border-0 px-4 py-3 disabled:bg-pure-300 text-base text-pure-900 placeholder-pure-500 focus:outline-none focus:ring-2 focus:ring-pri-300 focus:ring-offset-2 focus:ring-offset-pure-900 disabled:placeholder-pure-400"
                                                     disabled={!isConnected}
                                                 />
                                             </div>

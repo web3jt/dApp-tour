@@ -77,7 +77,7 @@ function Example() {
                             dui laoreet diam sed lacus, fames.
                         </p>
                         <Link
-                            className="block w-full rounded-md border border-transparent bg-white py-3 px-5 text-center text-base font-medium text-sec-700 shadow-md hover:bg-zinc-50 sm:inline-block sm:w-auto"
+                            className="block w-full rounded-md border border-transparent bg-white py-3 px-5 text-center text-base font-medium text-sec-700 shadow-md hover:bg-pure-50 sm:inline-block sm:w-auto"
                             href="#"
                         >
                             Seek for more infomation

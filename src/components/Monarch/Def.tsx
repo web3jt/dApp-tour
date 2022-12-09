@@ -13,7 +13,7 @@ interface SocialLinkProps {
 const SocialLink: React.FC<SocialLinkProps> = ({ href, ariaLabel, icon: Icon }) => {
     return (
         <Link className="group -m-1 p-1" href={href} aria-label={ariaLabel}>
-            <Icon className="transition h-6 w-6 fill-zinc-500 group-hover:fill-zinc-300" />
+            <Icon className="transition h-6 w-6 fill-pure-500 group-hover:fill-pure-300" />
         </Link>
     );
 }
@@ -23,10 +23,10 @@ function Example() {
     return (
         <div className="py-12 lg:py-24">
             <div className="max-w-3xl">
-                <h1 className="text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
+                <h1 className="text-4xl font-bold tracking-tight text-pure-100 sm:text-5xl">
                     What is Monarch?
                 </h1>
-                <p className="mt-6 text-base text-zinc-400">
+                <p className="mt-6 text-base text-pure-400">
                     Monarch is a circle for creative desires of Web3.
                     We believe in trendsetters and tastemakers will shape the digital future.
                     Our passion is to propel them by providing access to unique resources,
@@ -36,7 +36,7 @@ function Example() {
                 </p>
             </div>
             <div className="max-w-5xl">
-                <div className="mt-4 border-l-4 border-gray-500/50 px-4 xl:px-6 py-1 text-base text-zinc-500">
+                <div className="mt-4 border-l-4 border-pure-500/50 px-4 xl:px-6 py-1 text-base text-pure-500">
                     We are a 1-year-old project in development started
                     on October 2021 with many young athletes, emerging artists,
                     entrepreneurs joined who are passionate about contents and web3.

@@ -191,7 +191,7 @@ const Example = () => {
                                 <div className="flex px-4 pt-5 pb-2">
                                     <button
                                         type="button"
-                                        className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
+                                        className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-pure-400"
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         <span className="sr-only">Close menu</span>
@@ -201,14 +201,14 @@ const Example = () => {
 
                                 {/* Links */}
                                 <Tab.Group as="div" className="mt-2">
-                                    <div className="border-b border-gray-200">
+                                    <div className="border-b border-pure-200">
                                         <Tab.List className="-mb-px flex space-x-8 px-4">
                                             {navigation.categories.map((category) => (
                                                 <Tab
                                                     key={category.name}
                                                     className={({ selected }) =>
                                                         classNames(
-                                                            selected ? 'text-pri-600 border-pri-600' : 'text-gray-900 border-transparent',
+                                                            selected ? 'text-pri-600 border-pri-600' : 'text-pure-900 border-transparent',
                                                             'flex-1 whitespace-nowrap border-b-2 py-4 px-1 text-base font-medium'
                                                         )
                                                     }
@@ -224,14 +224,14 @@ const Example = () => {
                                                 <div className="grid grid-cols-2 gap-x-4 gap-y-10">
                                                     {category.featured.map((item) => (
                                                         <div key={item.name} className="group relative">
-                                                            <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
+                                                            <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-md bg-pure-100 group-hover:opacity-75">
                                                                 <Image src={item.imageSrc} alt={item.imageAlt} className="object-cover object-center" />
                                                             </div>
-                                                            <a href={item.href} className="mt-6 block text-sm font-medium text-gray-900">
+                                                            <a href={item.href} className="mt-6 block text-sm font-medium text-pure-900">
                                                                 <span className="absolute inset-0 z-10" aria-hidden="true" />
                                                                 {item.name}
                                                             </a>
-                                                            <p aria-hidden="true" className="mt-1 text-sm text-gray-500">
+                                                            <p aria-hidden="true" className="mt-1 text-sm text-pure-500">
                                                                 Shop now
                                                             </p>
                                                         </div>
@@ -242,30 +242,30 @@ const Example = () => {
                                     </Tab.Panels>
                                 </Tab.Group>
 
-                                <div className="space-y-6 border-t border-gray-200 py-6 px-4">
+                                <div className="space-y-6 border-t border-pure-200 py-6 px-4">
                                     {navigation.pages.map((page) => (
                                         <div key={page.name} className="flow-root">
-                                            <a href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
+                                            <a href={page.href} className="-m-2 block p-2 font-medium text-pure-900">
                                                 {page.name}
                                             </a>
                                         </div>
                                     ))}
                                 </div>
 
-                                <div className="space-y-6 border-t border-gray-200 py-6 px-4">
+                                <div className="space-y-6 border-t border-pure-200 py-6 px-4">
                                     <div className="flow-root">
-                                        <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
+                                        <a href="#" className="-m-2 block p-2 font-medium text-pure-900">
                                             Create an account
                                         </a>
                                     </div>
                                     <div className="flow-root">
-                                        <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
+                                        <a href="#" className="-m-2 block p-2 font-medium text-pure-900">
                                             Sign in
                                         </a>
                                     </div>
                                 </div>
 
-                                <div className="space-y-6 border-t border-gray-200 py-6 px-4">
+                                <div className="space-y-6 border-t border-pure-200 py-6 px-4">
                                     {/* Currency selector */}
                                     <form>
                                         <div className="inline-block">
@@ -276,14 +276,14 @@ const Example = () => {
                                                 <select
                                                     id="mobile-currency"
                                                     name="currency"
-                                                    className="flex items-center rounded-md border-transparent bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-gray-700 focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-800"
+                                                    className="flex items-center rounded-md border-transparent bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-pure-700 focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-pure-800"
                                                 >
                                                     {currencies.map((currency) => (
                                                         <option key={currency}>{currency}</option>
                                                     ))}
                                                 </select>
                                                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center">
-                                                    <ChevronDownIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
+                                                    <ChevronDownIcon className="h-5 w-5 text-pure-500" aria-hidden="true" />
                                                 </div>
                                             </div>
                                         </div>
@@ -296,7 +296,7 @@ const Example = () => {
             </Transition.Root>
 
             {/* Hero section */}
-            <div className="relative bg-gray-900">
+            <div className="relative bg-pure-900">
                 {/* Decorative image and overlay */}
                 <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
                     <Image
@@ -305,7 +305,7 @@ const Example = () => {
                         className="h-full w-full object-cover object-center"
                     />
                 </div>
-                <div aria-hidden="true" className="absolute inset-0 bg-gray-900 opacity-50" />
+                <div aria-hidden="true" className="absolute inset-0 bg-pure-900 opacity-50" />
 
                 {/* Navigation */}
                 <header className="relative z-10">
@@ -359,7 +359,7 @@ const Example = () => {
                                                                         leaveFrom="opacity-100"
                                                                         leaveTo="opacity-0"
                                                                     >
-                                                                        <Popover.Panel className="absolute inset-x-0 top-full text-sm text-gray-500">
+                                                                        <Popover.Panel className="absolute inset-x-0 top-full text-sm text-pure-500">
                                                                             {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                                                                             <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
 
@@ -368,14 +368,14 @@ const Example = () => {
                                                                                     <div className="grid grid-cols-4 gap-y-10 gap-x-8 py-16">
                                                                                         {category.featured.map((item) => (
                                                                                             <div key={item.name} className="group relative">
-                                                                                                <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
+                                                                                                <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-md bg-pure-100 group-hover:opacity-75">
                                                                                                     <Image
                                                                                                         src={item.imageSrc}
                                                                                                         alt={item.imageAlt}
                                                                                                         className="object-cover object-center"
                                                                                                     />
                                                                                                 </div>
-                                                                                                <a href={item.href} className="mt-4 block font-medium text-gray-900">
+                                                                                                <a href={item.href} className="mt-4 block font-medium text-pure-900">
                                                                                                     <span className="absolute inset-0 z-10" aria-hidden="true" />
                                                                                                     {item.name}
                                                                                                 </a>
@@ -467,7 +467,7 @@ const Example = () => {
                     </p>
                     <a
                         href="#"
-                        className="mt-8 inline-block rounded-md border border-transparent bg-white py-3 px-8 text-base font-medium text-gray-900 hover:bg-gray-100"
+                        className="mt-8 inline-block rounded-md border border-transparent bg-white py-3 px-8 text-base font-medium text-pure-900 hover:bg-pure-100"
                     >
                         Shop New Arrivals
                     </a>

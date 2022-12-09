@@ -17,7 +17,7 @@ const SocialLink: React.FC<SocialLinkProps> = ({ href, ariaLabel, icon: Icon }) 
         <Link className="group -m-1 p-1" href={href} aria-label={ariaLabel}>
             <Icon className={clsx(
                 'transition backdrop-blur',
-                'h-6 w-6 fill-zinc-600 group-hover:fill-pri-400',
+                'h-6 w-6 fill-pure-600 group-hover:fill-pri-400',
             )} />
         </Link>
     );
@@ -34,8 +34,8 @@ export function Footer() {
                                 'pointer-events-auto',
                                 'transition ease-in-out duration-500 backdrop-blur',
                                 'mx-auto h-auto w-12 md:w-16',
-                                'shadow-lg shadow-zinc-800/5',
-                                'text-zinc-600 hover:text-pri-400',
+                                'shadow-lg shadow-pure-800/5',
+                                'text-pure-600 hover:text-white',
                             )} />
                         </div>
 
@@ -69,8 +69,8 @@ export function Footer() {
                                         href={link.href}
                                         className={clsx(
                                             'transition rounded-lg py-1 px-3',
-                                            'hover:bg-zinc-800',
-                                            'text-zinc-700 hover:text-pri-400',
+                                            'hover:bg-pure-800',
+                                            'text-pure-700 hover:text-pri-400',
                                         )}
                                     >
                                         {link.title}
@@ -82,7 +82,7 @@ export function Footer() {
                     </InnerContainer>
                 </div>
 
-                <div className="border-t border-zinc-100 pt-10 pb-16 dark:border-zinc-700/40">
+                <div className="border-t border-pure-100 pt-10 pb-16 dark:border-pure-700/40">
                     <InnerContainer>
                         <div className={clsx(
                             'flex flex-col items-center sm:flex-row-reverse sm:justify-between',
@@ -116,7 +116,7 @@ export function Footer() {
                                 ))}
                             </div>
 
-                            <p className="pointer-events-none select-none text-sm text-zinc-600">
+                            <p className="pointer-events-none select-none text-sm text-pure-600">
                                 &copy; 2020 - {new Date().getFullYear()} Monarch Group. All rights reserved.
                             </p>
                         </div>

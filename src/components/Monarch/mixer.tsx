@@ -10,7 +10,7 @@ function Example() {
         <div id="mixer" className="relative overflow-hidden">
             <div className="hidden sm:absolute sm:inset-0 sm:block" aria-hidden="true">
                 <svg
-                    className="absolute bottom-0 right-0 mb-48 translate-x-1/2 transform text-zinc-700 lg:top-0 lg:mt-28 lg:mb-0 xl:translate-x-0 xl:transform-none"
+                    className="absolute bottom-0 right-0 mb-48 translate-x-1/2 transform text-pure-700 lg:top-0 lg:mt-28 lg:mb-0 xl:translate-x-0 xl:transform-none"
                     width={364}
                     height={384}
                     viewBox="0 0 364 384"
@@ -39,7 +39,7 @@ function Example() {
                                 <Link
                                     target="_blank"
                                     href={social.openSea}
-                                    className="inline-flex items-center rounded-full bg-black p-1 pr-2 text-white hover:text-zinc-200 sm:text-base lg:text-sm xl:text-base"
+                                    className="inline-flex items-center rounded-full bg-black p-1 pr-2 text-white hover:text-pure-200 sm:text-base lg:text-sm xl:text-base"
                                 >
                                     <span className="rounded-full bg-pri-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">
                                         Explore
@@ -47,12 +47,12 @@ function Example() {
                                     <span className="ml-4 text-sm">
                                         on OpenSEA
                                     </span>
-                                    <ChevronRightIcon className="ml-2 h-5 w-5 text-zinc-500" aria-hidden="true" />
+                                    <ChevronRightIcon className="ml-2 h-5 w-5 text-pure-500" aria-hidden="true" />
                                 </Link>
-                                <h1 className="mt-4 text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
+                                <h1 className="mt-4 text-4xl font-bold tracking-tight text-pure-100 sm:text-5xl">
                                     Monarch Mixer
                                 </h1>
-                                <p className="mt-6 text-base text-zinc-400">
+                                <p className="mt-6 text-base text-pure-400">
                                     Monarch Mixer are NFT mementos,
                                     minted in recognition for our early supporters.
                                     The word “Mixer” describes our journey and mission –

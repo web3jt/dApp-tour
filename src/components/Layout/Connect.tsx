@@ -27,8 +27,8 @@ export const CustomConnect = () => {
                             className={clsx([
                                 'transition backdrop-blur',
                                 'rounded-full px-3 py-2',
-                                'shadow-lg shadow-zinc-800/5',
-                                'bg-zinc-800/90',
+                                'shadow-lg shadow-pure-800/5',
+                                'bg-pure-800/90',
                                 'ring-1 ring-white/10 hover:ring-white/20',
                                 'text-sm font-medium',
                                 'text-white hover:text-teal-400',
@@ -73,8 +73,8 @@ export const CustomConnect = () => {
                             'transition backdrop-blur',
                             'inline-flex items-center gap-1',
                             'rounded-full pl-4 pr-2 py-2',
-                            'shadow-lg shadow-zinc-800/5',
-                            'bg-zinc-800/90',
+                            'shadow-lg shadow-pure-800/5',
+                            'bg-pure-800/90',
                             'ring-1 ring-white/10 hover:ring-white/20',
                             'font-medium text-sm text-white hover:text-teal-400',
                         ])}

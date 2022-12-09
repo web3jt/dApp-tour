@@ -335,6 +335,8 @@ module.exports = {
         //   900: '#134e4a',
         // },
 
+        pure: colors.zinc,
+
         // customize colors
         pri: colors.teal,
         sec: colors.indigo,
