@@ -34,7 +34,7 @@ export function Footer() {
                                 'pointer-events-auto',
                                 'transition ease-in-out duration-500 backdrop-blur',
                                 'mx-auto h-auto w-12 md:w-16',
-                                'shadow-lg shadow-pure-800/5',
+                                // 'shadow-lg shadow-pure-800/5',
                                 'text-pure-600 hover:text-white',
                             )} />
                         </div>

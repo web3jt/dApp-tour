@@ -31,7 +31,7 @@ export const CustomConnect = () => {
                                 'bg-pure-800/90',
                                 'ring-1 ring-white/10 hover:ring-white/20',
                                 'text-sm font-medium',
-                                'text-white hover:text-teal-400',
+                                'text-white hover:text-pri-400',
                             ])}
                             onClick={openConnectModal}
                         >
@@ -76,7 +76,7 @@ export const CustomConnect = () => {
                             'shadow-lg shadow-pure-800/5',
                             'bg-pure-800/90',
                             'ring-1 ring-white/10 hover:ring-white/20',
-                            'font-medium text-sm text-white hover:text-teal-400',
+                            'font-medium text-sm text-white hover:text-pri-400',
                         ])}
                     >
                         <span>

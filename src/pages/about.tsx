@@ -33,9 +33,9 @@ const SocialLink: React.FC<SocialLinkProps> = ({ className, href, children, icon
             <Link
                 target="_blank"
                 href={href}
-                className="group flex text-sm font-medium text-pure-800 transition hover:text-teal-500 dark:text-pure-200 dark:hover:text-teal-500"
+                className="group flex text-sm font-medium text-pure-800 transition hover:text-pri-500 dark:text-pure-200 dark:hover:text-pri-500"
             >
-                <Icon className="h-6 w-6 flex-none fill-pure-500 transition group-hover:fill-teal-500" />
+                <Icon className="h-6 w-6 flex-none fill-pure-500 transition group-hover:fill-pri-500" />
                 <span className="ml-4">{children}</span>
             </Link>
         </li>

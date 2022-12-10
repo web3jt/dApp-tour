@@ -1,6 +1,9 @@
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 
+// dark theme mgr
+import { ThemeProvider } from 'next-themes';
+
 // wagmi
 import { WagmiConfig } from "wagmi";
 import { chain } from 'wagmi';
@@ -22,23 +25,25 @@ function DApp({ Component, pageProps }: AppProps) {
     if (!mounted) return null;
 
     return (
-        <WagmiConfig client={wagmiClient}>
-            <RainbowKitProvider
-                theme={darkTheme()}
-                chains={chains}
-                initialChain={chain.goerli}
-                // showRecentTransactions={true}
-                appInfo={{
-                    // TODO
-                    appName: 'Rainbowkit Demo',
-                    learnMoreUrl: 'https://learnaboutcryptowallets.example',
-                }}
-            >
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-            </RainbowKitProvider>
-        </WagmiConfig>
+        <ThemeProvider attribute="class" defaultTheme="dark">
+            <WagmiConfig client={wagmiClient}>
+                <RainbowKitProvider
+                    theme={darkTheme()}
+                    chains={chains}
+                    initialChain={chain.goerli}
+                    // showRecentTransactions={true}
+                    appInfo={{
+                        // TODO
+                        appName: 'Rainbowkit Demo',
+                        learnMoreUrl: 'https://learnaboutcryptowallets.example',
+                    }}
+                >
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                </RainbowKitProvider>
+            </WagmiConfig>
+        </ThemeProvider>
     );
 }
 

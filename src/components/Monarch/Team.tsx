@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import teamSampleImage from '../../images/team/sample.avif';
+import teamSampleImage from '../../images/team/sample.jpeg';
 import { TwitterIcon, InstagramIcon, GitHubIcon, LinkedInIcon } from '../Icons/SocialIcons';
 
 const people = [

@@ -10,8 +10,7 @@ function Ani() {
                 <Logo className={clsx(
                     'pointer-events-auto',
                     'transition ease-in-out duration-500 backdrop-blur',
-                    'h-auto w-32', // rounded-full p-0.5
-                    'shadow-lg shadow-pure-800/5',
+                    'h-auto w-32',
                     'text-pure-400/50 hover:text-white',
                 )} />
 

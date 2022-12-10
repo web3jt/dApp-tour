@@ -41,7 +41,7 @@ function Example() {
                                     href={social.openSea}
                                     className="inline-flex items-center rounded-full bg-black p-1 pr-2 text-white hover:text-pure-200 sm:text-base lg:text-sm xl:text-base"
                                 >
-                                    <span className="rounded-full bg-pri-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">
+                                    <span className="rounded-full bg-sec-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">
                                         Explore
                                     </span>
                                     <span className="ml-4 text-sm">

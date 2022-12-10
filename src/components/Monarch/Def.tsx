@@ -13,7 +13,7 @@ interface SocialLinkProps {
 const SocialLink: React.FC<SocialLinkProps> = ({ href, ariaLabel, icon: Icon }) => {
     return (
         <Link className="group -m-1 p-1" href={href} aria-label={ariaLabel}>
-            <Icon className="transition h-6 w-6 fill-pure-500 group-hover:fill-pure-300" />
+            <Icon className="transition h-6 w-6 fill-pure-500 group-hover:fill-pri-400" />
         </Link>
     );
 }

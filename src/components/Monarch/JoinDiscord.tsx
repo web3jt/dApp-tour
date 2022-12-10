@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import discordImage from '../../images/discord.avif';
+import discordImage from '../../images/discord.jpeg';
 
 function Example() {
     return (

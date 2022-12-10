@@ -5,6 +5,7 @@
     "scripts": {
         "dev": "APP_ENV=development PORT=8080 next dev",
         "build": "next build && next export",
+        "deploy": "firebase deploy --only hosting:web3jt-dapp",
         "start": "next start",
         "lint": "next lint",
         "typechain": "typechain --out-dir src/config/abi/types --target=ethers-v5 \"src/config/abi/*.json\""
@@ -16,6 +17,7 @@
         "clsx": "^1.2.1",
         "ethers": "^5.7.2",
         "next": "^13.0.5",
+        "next-themes": "^0.2.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "typechain": "^8.1.1",

@@ -6,11 +6,15 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
+
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/typography'),
   ],
+
+  darkMode: 'class',
+
   theme: {
     fontSize: {
       xs: ['0.8125rem', { lineHeight: '1.5rem' }],
@@ -335,10 +339,11 @@ module.exports = {
         //   900: '#134e4a',
         // },
 
+        // gray
         pure: colors.zinc,
 
         // customize colors
-        pri: colors.teal,
+        pri: colors.orange,
         sec: colors.indigo,
 
         // to be applied colors
