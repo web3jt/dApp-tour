@@ -98,7 +98,7 @@ export default function Example() {
                             <li key={person.name} className="sm:py-8">
                                 <div className="space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
                                     <div className="aspect-w-3 aspect-h-2 sm:aspect-w-3 sm:aspect-h-4">
-                                        <Image className="rounded-lg object-cover shadow-lg" src={person.image} alt="" />
+                                        <Image className="rounded-lg object-cover shadow-lg hover:saturate-150" src={person.image} alt="" />
                                     </div>
                                     <div className="sm:col-span-2">
                                         <div className="space-y-4">
