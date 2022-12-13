@@ -6,6 +6,7 @@ import Def from "../components/Monarch/Def";
 import Mixer from "../components/Monarch/Mixer";
 import JoinDiscord from "../components/Monarch/JoinDiscord";
 import Team from "../components/Monarch/Team";
+// import Team2 from "../components/Monarch/Team2";
 import Container, { OuterContainer, InnerContainer } from "../components/Layout/Container";
 
 const Page: NextPage = () => {
@@ -21,6 +22,7 @@ const Page: NextPage = () => {
                 <Def />
                 <Mixer />
                 <Team />
+                {/* <Team2 /> */}
                 <JoinDiscord />
             </Container>
         </>

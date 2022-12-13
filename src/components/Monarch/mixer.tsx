@@ -4,11 +4,12 @@ import { Popover, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import social from '../../config/constants/social';
+import clsx from 'clsx';
 
 function Example() {
     return (
         <div id="mixer" className="relative overflow-hidden">
-            <div className="hidden sm:absolute sm:inset-0 sm:block" aria-hidden="true">
+            {/* <div className="hidden sm:absolute sm:inset-0 sm:block" aria-hidden="true">
                 <svg
                     className="absolute bottom-0 right-0 mb-48 translate-x-1/2 transform text-pure-700 lg:top-0 lg:mt-28 lg:mb-0 xl:translate-x-0 xl:transform-none"
                     width={364}
@@ -30,7 +31,7 @@ function Example() {
                     </defs>
                     <rect width={364} height={384} fill="url(#eab71dd9-9d7a-47bd-8044-256344ee00d0)" />
                 </svg>
-            </div>
+            </div> */}
             <div className="relative pt-6 py-12 lg:py-24">
                 <main className="mt-16 sm:mt-24">
                     <div className="lg:grid lg:grid-cols-12 lg:gap-8">
@@ -39,9 +40,9 @@ function Example() {
                                 <Link
                                     target="_blank"
                                     href={social.openSea}
-                                    className="inline-flex items-center rounded-full bg-black p-1 pr-2 text-white hover:text-pure-200 sm:text-base lg:text-sm xl:text-base"
+                                    className="inline-flex items-center rounded-full bg-zinc-800 p-1 pr-2 text-white hover:text-pure-200 sm:text-base lg:text-sm xl:text-base"
                                 >
-                                    <span className="rounded-full bg-sec-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">
+                                    <span className="rounded-full bg-gradient-to-r from-pri-700 to-pri-600 px-3 py-0.5 text-sm font-semibold leading-5 text-white">
                                         Explore
                                     </span>
                                     <span className="ml-4 text-sm">
@@ -53,9 +54,13 @@ function Example() {
                                     Monarch Mixer
                                 </h1>
                                 <p className="mt-6 text-base text-pure-400">
-                                    Monarch Mixer are NFT mementos,
+                                    Monarch Mixer is a collection of NFT mementos,
                                     minted in recognition for our early supporters.
-                                    The word “Mixer” describes our journey and mission –
+                                    The word
+                                    <span className="font-bold italic">
+                                        Mixer
+                                    </span>
+                                    describes our journey and mission –
                                     bring different names to collaborate something
                                     you wouldn’t expect and skyrocket the experience.
                                     We will continuously facilitate activities and
@@ -66,7 +71,10 @@ function Example() {
                                 <div className="mt-8">
                                     <Link
                                         href="/mixer"
-                                        className="mt-6 flex flex-shrink-0 items-center justify-center rounded-md border border-white border-opacity-25 bg-white bg-opacity-0 py-3 px-4 text-base font-medium text-white hover:bg-opacity-10 sm:mt-0 sm:ml-8 lg:ml-0 lg:w-full"
+                                        className={clsx(
+                                            'mt-6 flex flex-shrink-0 items-center justify-center rounded-md border border-white border-opacity-25 bg-white bg-opacity-0 py-3 px-4 text-base font-medium text-white sm:mt-0 sm:ml-8 lg:ml-0 lg:w-full',
+                                            'hover:bg-gradient-to-br hover:from-pri-600 hover:via-pri-500 hover:to-pri-600'
+                                        )}
                                     >
                                         Claim Monarch Mixer
                                     </Link>
