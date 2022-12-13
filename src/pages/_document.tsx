@@ -2,7 +2,7 @@ import { Head, Html, Main, NextScript } from 'next/document';
 
 function Document() {
     return (
-        <Html className="h-full antialiased" lang="en">
+        <Html className="h-full antialiased bg-black" lang="en">
             <Head>
 
             </Head>
