@@ -1,13 +1,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import teamSampleImage from '../../images/team/sample.jpeg';
+import imageBarney from '../../images/team/barney.jpeg';
+import imageSteven from '../../images/team/steven.jpeg';
+import imageSmoke from '../../images/team/smoke.jpeg';
+import imageCuff from '../../images/team/sample.jpeg';
+import imageCayla from '../../images/team/cayla.jpeg';
+import imageTodd from '../../images/team/sample.jpeg';
+import imageShahin from '../../images/team/sample.jpeg';
+import imageChristina from '../../images/team/christina.jpeg';
+import imageJunLi from '../../images/team/sample.jpeg';
 import { TwitterIcon, InstagramIcon, GitHubIcon, LinkedInIcon } from '../Icons/SocialIcons';
 
 const people = [
     {
         name: 'Barney',
         role: 'Community Manager and President',
-        image: teamSampleImage,
+        image: imageBarney,
         bio: 'Ultricies massa malesuada viverra cras lobortis.',
         twitterUrl: '#',
         linkedinUrl: '#',
@@ -15,7 +24,7 @@ const people = [
     {
         name: 'Steven',
         role: 'Operating Manager',
-        image: teamSampleImage,
+        image: imageSteven,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
         linkedinUrl: '#',
@@ -23,7 +32,7 @@ const people = [
     {
         name: 'Smoke',
         role: 'Artist Relation, Lifestyle Consultant at We The Best Music',
-        image: teamSampleImage,
+        image: imageSmoke,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
         linkedinUrl: '#',
@@ -31,7 +40,7 @@ const people = [
     {
         name: 'Cuff',
         role: 'Athlete Relation, Host of SomeDude Show (executively produced by Lebron James)',
-        image: teamSampleImage,
+        image: imageCuff,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
         linkedinUrl: '#',
@@ -39,7 +48,7 @@ const people = [
     {
         name: 'Cayla',
         role: 'Secretary and Administration',
-        image: teamSampleImage,
+        image: imageCayla,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
         linkedinUrl: '#',
@@ -47,7 +56,7 @@ const people = [
     {
         name: 'Todd Kramer',
         role: 'Artist Relation, ROSS + Kramer Gallery Owner, founder of GODA',
-        image: teamSampleImage,
+        image: imageTodd,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
         linkedinUrl: '#',
@@ -55,7 +64,7 @@ const people = [
     {
         name: 'Shahin',
         role: 'NFT/Web3 Advisor',
-        image: teamSampleImage,
+        image: imageShahin,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
         linkedinUrl: '#',
@@ -63,7 +72,7 @@ const people = [
     {
         name: 'Christina',
         role: 'Growth and Global Relation',
-        image: teamSampleImage,
+        image: imageChristina,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
         linkedinUrl: '#',
@@ -71,7 +80,7 @@ const people = [
     {
         name: 'Jun Li',
         role: 'Economics Advisor, Professor of Mathematics Department at Stanford',
-        image: teamSampleImage,
+        image: imageJunLi,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
         linkedinUrl: '#',
