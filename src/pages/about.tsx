@@ -69,23 +69,17 @@ const Page: NextPage = () => {
                     </div>
                     <div className="lg:order-first lg:row-span-2">
                         <h1 className="text-4xl font-bold tracking-tight text-pure-800 dark:text-pure-100 sm:text-5xl">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                            About Monarch
                         </h1>
                         <div className="mt-6 space-y-7 text-base text-pure-600 dark:text-pure-400">
                             <p>
-                                Ut vestibulum scelerisque tortor, sit amet blandit ex interdum vitae. In ac fringilla dolor, non gravida orci. Cras cursus non massa ut facilisis.
+                                Monarch isn’t your regular community. It’s a collective of the world’s new elite thinkers, creators and leaders working together to bring experiences of the highest echelon around the globe.
                             </p>
                             <p>
-                                Nullam nec posuere purus. Integer vestibulum faucibus quam, id commodo justo fringilla at. Phasellus blandit aliquam ligula, vitae vestibulum turpis. Praesent a odio velit. Nulla et lacus purus. Nullam ante dolor, consequat vel accumsan at, mollis a massa.
+                                Our name, Monarch, is inspired by the Monarch butterfly, an insect who’s transatlantic migration is an effort of sheer perseverance and generational effort. The flutter strengthens the butterfly, and the butterfly strengthens the flutter. Similarly Monarch strengthens our members, and our members strengthen Monarch.
                             </p>
                             <p>
-                                Nullam efficitur nulla in quam egestas auctor. Maecenas faucibus placerat molestie. Phasellus est sapien, pulvinar quis tristique in, sollicitudin ut erat. Vivamus et luctus velit. Cras gravida auctor blandit.
-                            </p>
-                            <p>
-                                Mauris pulvinar neque et commodo molestie. Etiam a consequat sem. Nulla faucibus laoreet justo, sit amet fermentum diam vestibulum id. Nullam viverra justo leo, eu euismod augue lobortis ullamcorper. Maecenas malesuada tellus eu dui consectetur tempor.
-                            </p>
-                            <p>
-                                Donec neque odio, imperdiet id dapibus lacinia, euismod non est. Vivamus sit amet ligula sit amet odio imperdiet efficitur. Praesent in arcu sit amet massa imperdiet dignissim vel ut purus. Cras luctus eget leo et gravida. Aenean at lacus at purus efficitur semper a ac diam. Cras interdum erat lorem, nec varius lorem egestas sit amet.
+                                The world we live in is shaped by the rebels, the artists, the inventors, those who cross the lines, and break the boundaries. We, Monarch, are here to bridge, support, and bring creative resources to our members, to help them shape the new world. A better world.
                             </p>
                         </div>
                     </div>

@@ -28,8 +28,6 @@ type NodeProps = {
     style?: React.CSSProperties;
 }
 
-
-
 const MobileNavItem = ({ href, children }: LinkProps) => {
     return (
         <li>

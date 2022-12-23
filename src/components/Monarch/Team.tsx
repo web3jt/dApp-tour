@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import teamSampleImage from '../../images/team/sample.jpeg';
+import imageSample from '../../images/team/sample.jpeg';
 import imageBarney from '../../images/team/barney.jpeg';
 import imageSteven from '../../images/team/steven.jpeg';
 import imageSmoke from '../../images/team/smoke.jpeg';
@@ -15,7 +15,7 @@ import { TwitterIcon, InstagramIcon, GitHubIcon, LinkedInIcon } from '../Icons/S
 const people = [
     {
         name: 'Barney',
-        role: 'Community Manager and President',
+        role: 'President and Founder @ Monarch, Passionate in rare collectibles',
         image: imageBarney,
         bio: 'Ultricies massa malesuada viverra cras lobortis.',
         twitterUrl: '#',
@@ -23,7 +23,7 @@ const people = [
     },
     {
         name: 'Steven',
-        role: 'Operating Manager',
+        role: 'Executive Member and Management Committee',
         image: imageSteven,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
@@ -31,7 +31,7 @@ const people = [
     },
     {
         name: 'Smoke',
-        role: 'Artist Relation, Lifestyle Consultant at We The Best Music',
+        role: 'Artist Relation in Music, Lifestyle Consultant at We The Best Music',
         image: imageSmoke,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
@@ -39,7 +39,7 @@ const people = [
     },
     {
         name: 'Cuff',
-        role: 'Athlete Relation, Host of SomeDude Show (executively produced by Lebron James)',
+        role: 'Global Sports Development, Founder @ SomeDude Show (EP by Lebron James)',
         image: imageCuff,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
@@ -47,7 +47,7 @@ const people = [
     },
     {
         name: 'Cayla',
-        role: 'Secretary and Administration',
+        role: 'Secretary and Head Member of Management Committee',
         image: imageCayla,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
@@ -55,31 +55,31 @@ const people = [
     },
     {
         name: 'Todd Kramer',
-        role: 'Artist Relation, ROSS + Kramer Gallery Owner, founder of GODA',
+        role: 'Artist Relation, Owner @ ROSS + Kramer Gallery and Founder @ GODA',
         image: imageTodd,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
     {
-        name: 'Shahin',
-        role: 'NFT/Web3 Advisor',
-        image: imageShahin,
-        bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
-        twitterUrl: '#',
-        linkedinUrl: '#',
-    },
-    {
         name: 'Christina',
-        role: 'Growth and Global Relation',
+        role: 'Growth and Global Relation, Previously MD of a global venture capital',
         image: imageChristina,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
     {
+        name: 'Yanyan',
+        role: 'Board of Advisor, extensive network in talents across Asia Pacific Region',
+        image: imageSample,
+        bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
+        twitterUrl: '#',
+        linkedinUrl: '#',
+    },
+    {
         name: 'Jun Li',
-        role: 'Economics Advisor, Professor of Mathematics Department at Stanford',
+        role: 'Economics Advisor, Professor @ Mathematics Department at Stanford',
         image: imageJunLi,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
@@ -90,11 +90,10 @@ const people = [
 
 export default function Example() {
     return (
-
-        <div className="py-12 lg:py-24">
+        <div id="team" className="py-12 lg:py-24">
             <div className="space-y-12">
                 <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                    Meet our leadership
+                    Management Committee and Community Leadership
                 </h2>
                 <ul
                     role="list"
@@ -112,7 +111,7 @@ export default function Example() {
                                             <h3>
                                                 {person.name}
                                             </h3>
-                                            <p className="text-sec-700">
+                                            <p className="text-sec-500">
                                                 {person.role}
                                             </p>
                                         </div>
