@@ -58,7 +58,7 @@ function Example() {
                                     minted in recognition for our early supporters.
                                     The word
                                     <span className="font-bold italic">
-                                        Mixer
+                                        &nbsp;Mixer&nbsp;
                                     </span>
                                     describes our journey and mission –
                                     bring different names to collaborate something

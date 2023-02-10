@@ -3,7 +3,7 @@ const social = {
     openSea: 'https://opensea.io/',
     twitter: 'https://twitter.com/monarch_io',
     facebook: 'https://www.facebook.com/your_facebook',
-    instagram: 'https://www.instagram.com/your_instagram',
+    instagram: 'https://www.instagram.com/monarch_io',
     linkedin: 'https://www.linkedin.com/in/your_linkedin',
     github: 'https://github.com/web3monarch',
     youtube: '',

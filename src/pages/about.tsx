@@ -73,13 +73,16 @@ const Page: NextPage = () => {
                         </h1>
                         <div className="mt-6 space-y-7 text-base text-pure-600 dark:text-pure-400">
                             <p>
-                                Monarch isn’t your regular community. It’s a collective of the world’s new elite thinkers, creators and leaders working together to bring experiences of the highest echelon around the globe.
+                                Behind every extraordinary collectible, there is a unique story and journey.
                             </p>
                             <p>
-                                Our name, Monarch, is inspired by the Monarch butterfly, an insect who’s transatlantic migration is an effort of sheer perseverance and generational effort. The flutter strengthens the butterfly, and the butterfly strengthens the flutter. Similarly Monarch strengthens our members, and our members strengthen Monarch.
+                                Our name Monarch is inspired by the monarch butterfly, an insect whose transatlantic migration is an effort of sheer perseverance and generational effort. The flutter strengthens the butterfly, and the butterfly strengthens the flutter.
                             </p>
                             <p>
-                                The world we live in is shaped by the rebels, the artists, the inventors, those who cross the lines, and break the boundaries. We, Monarch, are here to bridge, support, and bring creative resources to our members, to help them shape the new world. A better world.
+                                Similarly, Monarch attracts those who translate the ethos of collecting to an entire lifestyle. Many of our members are friends for decades during which we collected different tastes and traveled around the world. Monarch strengthens our members, and our members strengthens Monarch.
+                            </p>
+                            <p>
+                                We now welcome people who want to dig in, build Monarch together, and discover something special for themselves. We are releasing an NFT membership collection for our friends, artists, partners, and builders. The 2,100 NFT membership will be released in 3 stages: Invitation, Application, Public Mint. The support we generate will become fire and gas to make Monarch a bigger hub.
                             </p>
                         </div>
                     </div>
@@ -94,9 +97,9 @@ const Page: NextPage = () => {
                             <SocialLink href={social.github} icon={GitHubIcon} className="mt-4">
                                 Follow on GitHub
                             </SocialLink>
-                            <SocialLink href={social.linkedin} icon={LinkedInIcon} className="mt-4">
+                            {/* <SocialLink href={social.linkedin} icon={LinkedInIcon} className="mt-4">
                                 Follow on LinkedIn
-                            </SocialLink>
+                            </SocialLink> */}
                             <SocialLink
                                 href={`mailto:${social.email}`}
                                 icon={MailIcon}

@@ -1,23 +1,20 @@
-import Image from 'next/image';
-import { Logo } from '../Monarch/Logo';
-import clsx from 'clsx';
-
-
 function Ani() {
     return (
-        <div className="py-12 lg:py-24">
-            <div className="py-12 flex flex-col items-center justify-center text-pure-600">
-                <Logo className={clsx(
-                    'pointer-events-auto',
-                    'transition ease-in-out duration-500 backdrop-blur',
-                    'h-auto w-32',
-                    'text-pure-400/50 hover:text-white',
-                )} />
-
-                <div className="text-sm">
-                    Another animated image here...
-                </div>
-            </div>
+        <div className="pt-12 lg:pt-24">
+            <video
+                className="border-0"
+                autoPlay
+                loop
+                muted
+                x5-playsinline
+                playsInline
+                webkit-playsinline
+                x-webkit-airplay
+                x5-video-player-fullscreen
+                x5-video-player-type="h5"
+            >
+                <source src="https://assets.monarch.one/videos/logo1536.mp4?v=2" type="video/mp4" />
+            </video>
         </div>
     )
 }

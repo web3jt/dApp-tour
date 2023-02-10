@@ -27,25 +27,11 @@ function Example() {
                     What is Monarch?
                 </h1>
                 <p className="mt-6 text-base text-pure-400">
-                    Monarch is a circle for creative desires of Web3.
-                    We believe in trendsetters and tastemakers will shape the digital future.
-                    Our passion is to propel them by providing access to unique resources,
-                    and as a group we bring higher echelon experience to the space and skyrocket it.
-                    The name Monarch derives from Monarch Butterfly,
-                    which is known for its transatlantic overwinter migration in group of one million butterflies.
+                    Collectible is a universal language. Monarch is a global village for collectors & artists to exchange resources and opportunities. We share the passion of discovering new collectibles and the "if you know, you know”. We are releasing an NFT membership collection for our friends, builders, artists, and partners. The support we generate will become fire and gas to make Monarch a bigger hub. A hub that discovers new creators and explores their imagination since day one. A hub that bridges people, culture, creatives around the world.
                 </p>
             </div>
             <div className="max-w-5xl">
-                <div className="mt-4 border-l-4 border-pure-500/50 px-4 xl:px-6 py-1 text-base text-pure-500">
-                    We are a 1-year-old project in development started
-                    on October 2021 with many young athletes, emerging artists,
-                    entrepreneurs joined who are passionate about contents and web3.
-                    We want Monarch to be a permanent hub and transformational center,
-                    connecting the tastemakers to creative resources,
-                    education and activities that will explore new pathways to digital world.
-                </div>
                 <div className="mt-6 flex gap-6">
-
                     {[
                         {
                             href: social.twitter,
@@ -63,11 +49,11 @@ function Example() {
                             ariaLabel: "Follow on GitHub",
                             icon: GitHubIcon,
                         },
-                        {
-                            href: social.linkedin,
-                            ariaLabel: "Follow on LinkedIn",
-                            icon: LinkedInIcon,
-                        },
+                        // {
+                        //     href: social.linkedin,
+                        //     ariaLabel: "Follow on LinkedIn",
+                        //     icon: LinkedInIcon,
+                        // },
                     ].map((link, key) => (
                         <SocialLink key={key} href={link.href} ariaLabel={link.ariaLabel} icon={link.icon} />
                     ))}

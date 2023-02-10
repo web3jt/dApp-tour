@@ -18,14 +18,18 @@ const Page: NextPage = () => {
                 <meta name="description" content="Monarch" />
             </Head>
 
-            <Container className="mt-12">
+            <OuterContainer>
                 <Ani />
+            </OuterContainer>
+
+            <Container className="mt-12">
+
                 <Def />
-                <Mixer />
+                {/* <Mixer /> */}
                 <Team />
-                <LogoCloud />
+                {/* <LogoCloud /> */}
                 {/* <Team2 /> */}
-                <JoinDiscord />
+                {/* <JoinDiscord /> */}
             </Container>
         </>
     );

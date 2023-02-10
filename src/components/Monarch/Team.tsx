@@ -4,84 +4,94 @@ import imageSample from '../../images/team/sample.jpeg';
 import imageBarney from '../../images/team/barney.jpeg';
 import imageSteven from '../../images/team/steven.jpeg';
 import imageSmoke from '../../images/team/smoke.jpeg';
-import imageCuff from '../../images/team/sample.jpeg';
+import imageCuff from '../../images/team/cuff.jpeg';
 import imageCayla from '../../images/team/cayla.jpeg';
-import imageTodd from '../../images/team/sample.jpeg';
-import imageShahin from '../../images/team/sample.jpeg';
+import imageTodd from '../../images/team/todd.jpeg';
 import imageChristina from '../../images/team/christina.jpeg';
-import imageJunLi from '../../images/team/sample.jpeg';
+import imageYan from '../../images/team/yan.jpeg';
+import imageJunLi from '../../images/team/junli.jpeg';
+import imageGreg from '../../images/team/greg.jpeg';
 import { TwitterIcon, InstagramIcon, GitHubIcon, LinkedInIcon } from '../Icons/SocialIcons';
 
 const people = [
     {
         name: 'Barney',
-        role: 'President and Founder @ Monarch, Passionate in rare collectibles',
+        role: 'Founder and Chairman of Monarch',
         image: imageBarney,
-        bio: 'Ultricies massa malesuada viverra cras lobortis.',
+        bio: 'Investor and advisor for some of the hottest emerging streetwear brands, cultural brands, and art projects. Passionate in rare collectibles and contemporary art.',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
     {
         name: 'Steven',
-        role: 'Executive Member and Management Committee',
+        role: 'Chief Executive Officer',
         image: imageSteven,
-        bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
-        twitterUrl: '#',
-        linkedinUrl: '#',
-    },
-    {
-        name: 'Smoke',
-        role: 'Artist Relation in Music, Lifestyle Consultant at We The Best Music',
-        image: imageSmoke,
-        bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
+        bio: 'Joined and Co-founded Monarch in 2019. Introduced to entrepreneurship early, Steven has invested, founded, and led many exceptional projects. His dream is to build a portfolio of successful projects that make our world healthier.',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
     {
         name: 'Cuff',
-        role: 'Global Sports Development, Founder @ SomeDude Show (EP by Lebron James)',
+        role: 'Chief Basketball Officer',
         image: imageCuff,
-        bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
+        bio: 'Cuffsthelegend. NBA insider, Professional podcaster, and culture curator. Cuff oversees Monarch’s sports operation, from discovering exceptional talents to creating a supportive environment that inspires more.',
+        twitterUrl: '#',
+        linkedinUrl: '#',
+    },
+
+    {
+        name: 'Smoke',
+        role: 'Music Artist Relation',
+        image: imageSmoke,
+        bio: 'Chrissmokes, Entrepreneur, founder of Christopher and Co, Lifestyle Consultant at We The Best Music. Chris oversees Monarch’s hiphop development in a different way. It is a culture that expands positive influences around world and changes many lives.',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
     {
         name: 'Cayla',
-        role: 'Secretary and Head Member of Management Committee',
+        role: 'Chief Operation Officer',
         image: imageCayla,
-        bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
+        bio: 'Joined and Co-founded Monarch in 2022. With a background in fashion and finance, Cayla has experience building and managing teams across diverse technical disciplines. Outside of building Monarch, Cayla is a visionary with plans for bridging tastemaker economy between East and West.',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
     {
         name: 'Todd Kramer',
-        role: 'Artist Relation, Owner @ ROSS + Kramer Gallery and Founder @ GODA',
+        role: 'Artist Relation',
         image: imageTodd,
-        bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
-        twitterUrl: '#',
-        linkedinUrl: '#',
-    },
-    {
-        name: 'Christina',
-        role: 'Growth and Global Relation, Previously MD of a global venture capital',
-        image: imageChristina,
-        bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
-        twitterUrl: '#',
-        linkedinUrl: '#',
-    },
-    {
-        name: 'Yanyan',
-        role: 'Board of Advisor, extensive network in talents across Asia Pacific Region',
-        image: imageSample,
-        bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
+        bio: 'Outside of Monarch, Todd is a reputable contemporary artist manager, ROSS + Kramer Gallery owner, NFT degen, founder of GODA, and advisor to multiple Web 3 projects. Todd is committed to inspiring more artists to explore digital as a new medium.',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
     {
         name: 'Jun Li',
-        role: 'Economics Advisor, Professor @ Mathematics Department at Stanford',
+        role: 'Economics Advisor',
         image: imageJunLi,
-        bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
+        bio: 'Professor of Mathematics at Stanford University. Jun won 1st place at National Math Competition in China. (2nd won by Dr. Eugene Xu, Co-Founder of LibreMax Capital ft. in movie Big Short).',
+        twitterUrl: '#',
+        linkedinUrl: '#',
+    },
+    {
+        name: 'Yan',
+        role: 'Global Relation in Hong Kong',
+        image: imageYan,
+        bio: 'Passionate art collectors. Yan has a decade of experience helping Billionaires all around the world to asset allocation, including financial investment, luxury real estate financing, private jet financing, yacht financing, and arts financing.',
+        twitterUrl: '#',
+        linkedinUrl: '#',
+    },
+    {
+        name: 'Christina',
+        role: 'Financial and Risk Officer',
+        image: imageChristina,
+        bio: 'Over 15 years of experience in Investment Banking and Private Equity. Christina moved to Venture Capital in 2016 and had been trusted to become CFO by many of the projects her company invested.',
+        twitterUrl: '#',
+        linkedinUrl: '#',
+    },
+    {
+        name: 'Greg',
+        role: 'Community Manager',
+        image: imageGreg,
+        bio: 'A renowned art collector who is always searching for the new and the different. Greg’s first startup Image-NY stands among the leading sneaker & streetwear stores in New York. Greg’s shop and collections are living proof – each pair and each piece holds a story waiting to be shared.',
         twitterUrl: '#',
         linkedinUrl: '#',
     },

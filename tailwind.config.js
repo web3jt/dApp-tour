@@ -343,7 +343,7 @@ module.exports = {
         pure: colors.zinc,
 
         // customize colors
-        pri: colors.orange,
+        pri: colors.indigo,
         sec: colors.indigo,
 
         // to be applied colors

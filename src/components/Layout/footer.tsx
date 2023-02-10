@@ -106,11 +106,11 @@ export function Footer() {
                                         ariaLabel: "Follow on GitHub",
                                         icon: GitHubIcon,
                                     },
-                                    {
-                                        href: social.linkedin,
-                                        ariaLabel: "Follow on LinkedIn",
-                                        icon: LinkedInIcon,
-                                    },
+                                    // {
+                                    //     href: social.linkedin,
+                                    //     ariaLabel: "Follow on LinkedIn",
+                                    //     icon: LinkedInIcon,
+                                    // },
                                 ].map((link, key) => (
                                     <SocialLink key={key} href={link.href} ariaLabel={link.ariaLabel} icon={link.icon} />
                                 ))}
