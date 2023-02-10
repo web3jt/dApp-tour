@@ -95,6 +95,14 @@ const people = [
         twitterUrl: '#',
         linkedinUrl: '#',
     },
+    {
+        name: 'Matt',
+        role: 'Community builder and a dot connector',
+        image: imageSample,
+        bio: 'Over a decade spent in collecting rare sports cards and sneakers. Outside of Monarch, Matt is working in tech sales and always tends to stay in the know of what’s next in terms of emerging technologies and innovations.',
+        twitterUrl: '#',
+        linkedinUrl: '#',
+    },
 ]
 
 
