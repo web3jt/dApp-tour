@@ -38,7 +38,6 @@ const people = [
         twitterUrl: '#',
         linkedinUrl: '#',
     },
-
     {
         name: 'Smoke',
         role: 'Music Artist Relation',
@@ -55,14 +54,14 @@ const people = [
         twitterUrl: '#',
         linkedinUrl: '#',
     },
-    {
-        name: 'Todd Kramer',
-        role: 'Artist Relation',
-        image: imageTodd,
-        bio: 'Outside of Monarch, Todd is a reputable contemporary artist manager, ROSS + Kramer Gallery owner, NFT degen, founder of GODA, and advisor to multiple Web 3 projects. Todd is committed to inspiring more artists to explore digital as a new medium.',
-        twitterUrl: '#',
-        linkedinUrl: '#',
-    },
+    // {
+    //     name: 'Todd Kramer',
+    //     role: 'Artist Relation',
+    //     image: imageTodd,
+    //     bio: 'Outside of Monarch, Todd is a reputable contemporary artist manager, ROSS + Kramer Gallery owner, NFT degen, founder of GODA, and advisor to multiple Web 3 projects. Todd is committed to inspiring more artists to explore digital as a new medium.',
+    //     twitterUrl: '#',
+    //     linkedinUrl: '#',
+    // },
     {
         name: 'Jun Li',
         role: 'Economics Advisor',
@@ -95,14 +94,14 @@ const people = [
         twitterUrl: '#',
         linkedinUrl: '#',
     },
-    {
-        name: 'Matt',
-        role: 'Community builder and a dot connector',
-        image: imageSample,
-        bio: 'Over a decade spent in collecting rare sports cards and sneakers. Outside of Monarch, Matt is working in tech sales and always tends to stay in the know of what’s next in terms of emerging technologies and innovations.',
-        twitterUrl: '#',
-        linkedinUrl: '#',
-    },
+    // {
+    //     name: 'Matt',
+    //     role: 'Community builder and a dot connector',
+    //     image: imageSample,
+    //     bio: 'Over a decade spent in collecting rare sports cards and sneakers. Outside of Monarch, Matt is working in tech sales and always tends to stay in the know of what’s next in terms of emerging technologies and innovations.',
+    //     twitterUrl: '#',
+    //     linkedinUrl: '#',
+    // },
 ]
 
 
