@@ -1,0 +1,10 @@
+{
+    "names": {
+        "imiyeonc": "3f4b52b176c998f313c6802f8f908707f76a8c9a56c507fcabd05b40dce932c6"
+    },
+    "relays": {
+        "3f4b52b176c998f313c6802f8f908707f76a8c9a56c507fcabd05b40dce932c6": [
+            "wss://relay.damus.io"
+        ]
+    }
+}
