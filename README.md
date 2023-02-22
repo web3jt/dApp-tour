@@ -8,3 +8,8 @@
 - [x] TailwindCSS
 - [ ] ...
 
+## hosting
+
+```bash
+$ firebase deploy --only hosting:web3jt-dapp
+```

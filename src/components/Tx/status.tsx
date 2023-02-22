@@ -11,7 +11,7 @@ const TxStatus: React.FC<Props> = (props) => {
     const wft = props.waitForTx;
 
     return (
-        <div className="w-full border bg-gray-500">
+        <div className="w-full border bg-pure-500">
             {wft?.isIdle && (
                 <p>
                     isIdle: {wft.isIdle.toString()}

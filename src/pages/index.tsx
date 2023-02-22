@@ -1,19 +1,37 @@
-import React from 'react';
 import type { NextPage } from "next";
+import React from 'react';
 import Head from "next/head";
-import Mint from "../components/Monarch/mint";
+import Ani from "../components/Monarch/Ani";
+import Def from "../components/Monarch/Def";
+import Mixer from "../components/Monarch/Mixer";
+import JoinDiscord from "../components/Monarch/JoinDiscord";
+import Team from "../components/Monarch/Team";
+import LogoCloud from "../components/Monarch/LogoCloud";
+// import Team2 from "../components/Monarch/Team2";
+import Container, { OuterContainer, InnerContainer } from "../components/Layout/Container";
 
 const Page: NextPage = () => {
     return (
-        <div>
+        <>
             <Head>
-                <title>Claim MonarchMixer</title>
-                <meta name="description" content="Claim MonarchMixer ERC1155 NFT" />
+                <title>Monarch</title>
+                <meta name="description" content="Monarch" />
             </Head>
-            <div className="bg-gray-800">
-                <Mint />
-            </div>
-        </div>
+
+            <OuterContainer>
+                <Ani />
+            </OuterContainer>
+
+            <Container className="mt-12">
+
+                <Def />
+                {/* <Mixer /> */}
+                <Team />
+                {/* <LogoCloud /> */}
+                {/* <Team2 /> */}
+                {/* <JoinDiscord /> */}
+            </Container>
+        </>
     );
 };
 

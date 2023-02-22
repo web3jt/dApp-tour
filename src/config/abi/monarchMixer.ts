@@ -21,6 +21,17 @@ export default [
         "type": "constructor"
     },
     {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "operator",
+                "type": "address"
+            }
+        ],
+        "name": "OperatorNotAllowed",
+        "type": "error"
+    },
+    {
         "anonymous": false,
         "inputs": [
             {
@@ -183,6 +194,19 @@ export default [
         "type": "event"
     },
     {
+        "inputs": [],
+        "name": "OPERATOR_FILTER_REGISTRY",
+        "outputs": [
+            {
+                "internalType": "contract IOperatorFilterRegistry",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "internalType": "address",
@@ -238,50 +262,6 @@ export default [
                 "internalType": "string",
                 "name": "",
                 "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "account_",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "tokenId_",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint64",
-                "name": "proofId_",
-                "type": "uint64"
-            },
-            {
-                "internalType": "bytes32[]",
-                "name": "proof_",
-                "type": "bytes32[]"
-            }
-        ],
-        "name": "check",
-        "outputs": [
-            {
-                "internalType": "bytes32",
-                "name": "merkleRoot",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "uint256",
-                "name": "timestamp",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint8",
-                "name": "err",
-                "type": "uint8"
             }
         ],
         "stateMutability": "view",
@@ -599,7 +579,7 @@ export default [
             },
             {
                 "internalType": "uint256",
-                "name": "id",
+                "name": "tokenId",
                 "type": "uint256"
             },
             {
